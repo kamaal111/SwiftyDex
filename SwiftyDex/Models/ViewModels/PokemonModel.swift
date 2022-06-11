@@ -9,7 +9,7 @@ import Foundation
 import PokeAPI
 
 final class PokemonModel: ObservableObject {
-    @Published var pokemonEntries: [PokedexResponse.PokemonEntry] = []
+    @Published var pokemons: [Pokemon] = []
 
     private let pokeAPI: PokeAPI
 
@@ -35,11 +35,16 @@ final class PokemonModel: ObservableObject {
             pokedexResponse = success
         }
 
-        await setPokemonEntries(pokedexResponse.pokemonEntries)
+        let pokemons = pokedexResponse.pokemonEntries
+            .map {
+                Pokemon(name: $0.pokemonSpecies.name, pokedexNumber: $0.entryNumber)
+            }
+
+        await setPokemons(pokemons)
     }
 
     @MainActor
-    private func setPokemonEntries(_ pokemonEntries: [PokedexResponse.PokemonEntry]) {
-        self.pokemonEntries = pokemonEntries
+    private func setPokemons(_ pokemons: [Pokemon]) {
+        self.pokemons = pokemons
     }
 }

@@ -18,6 +18,9 @@
 		2C9F03742854C60B00251D96 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F03732854C60B00251D96 /* Sidebar.swift */; };
 		2C9F03762854C6BC00251D96 /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F03752854C6BC00251D96 /* DetailColumn.swift */; };
 		2C9F03792854CB7900251D96 /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F03782854CB7900251D96 /* PokemonModel.swift */; };
+		2CEA34E228550F060011B9B9 /* UrlImageView in Frameworks */ = {isa = PBXBuildFile; productRef = 2CEA34E128550F060011B9B9 /* UrlImageView */; };
+		2CEA34E528550FF40011B9B9 /* ShrimpExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2CEA34E428550FF40011B9B9 /* ShrimpExtensions */; };
+		2CEA34E82855111D0011B9B9 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA34E72855111D0011B9B9 /* Pokemon.swift */; };
 		2CFC54712854FED2006CDB11 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC54702854FED2006CDB11 /* Navigator.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +38,7 @@
 		2C9F03732854C60B00251D96 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		2C9F03752854C6BC00251D96 /* DetailColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailColumn.swift; sourceTree = "<group>"; };
 		2C9F03782854CB7900251D96 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
+		2CEA34E72855111D0011B9B9 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		2CFC54702854FED2006CDB11 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +48,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C9F03672854B81A00251D96 /* PokeAPI in Frameworks */,
+				2CEA34E528550FF40011B9B9 /* ShrimpExtensions in Frameworks */,
+				2CEA34E228550F060011B9B9 /* UrlImageView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,8 +123,9 @@
 		2C9F03692854C3E300251D96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2C9F03772854CB4B00251D96 /* ViewModels */,
 				2C9F036A2854C3E900251D96 /* CoreData */,
+				2CEA34E62855110D0011B9B9 /* Structures */,
+				2C9F03772854CB4B00251D96 /* ViewModels */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -166,6 +173,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		2CEA34E62855110D0011B9B9 /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				2CEA34E72855111D0011B9B9 /* Pokemon.swift */,
+			);
+			path = Structures;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -185,6 +200,8 @@
 			name = SwiftyDex;
 			packageProductDependencies = (
 				2C9F03662854B81A00251D96 /* PokeAPI */,
+				2CEA34E128550F060011B9B9 /* UrlImageView */,
+				2CEA34E428550FF40011B9B9 /* ShrimpExtensions */,
 			);
 			productName = SwiftyDex;
 			productReference = 2C30BA9128527D3C00553121 /* SwiftyDex.app */;
@@ -214,6 +231,10 @@
 				Base,
 			);
 			mainGroup = 2C30BA8828527D3C00553121;
+			packageReferences = (
+				2CEA34E028550F060011B9B9 /* XCRemoteSwiftPackageReference "UrlImageView" */,
+				2CEA34E328550FF40011B9B9 /* XCRemoteSwiftPackageReference "ShrimpExtensions" */,
+			);
 			productRefGroup = 2C30BA9228527D3C00553121 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -267,6 +288,7 @@
 				2CFC54712854FED2006CDB11 /* Navigator.swift in Sources */,
 				2C9F03712854C4B900251D96 /* PokedexScreen.swift in Sources */,
 				2C30BA9A28527D3C00553121 /* SwiftyDex.xcdatamodeld in Sources */,
+				2CEA34E82855111D0011B9B9 /* Pokemon.swift in Sources */,
 				2C30BA9C28527D3C00553121 /* ContentView.swift in Sources */,
 				2C9F03742854C60B00251D96 /* Sidebar.swift in Sources */,
 				2C30BA9728527D3C00553121 /* Persistence.swift in Sources */,
@@ -473,10 +495,39 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		2CEA34E028550F060011B9B9 /* XCRemoteSwiftPackageReference "UrlImageView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kamaal111/UrlImageView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		2CEA34E328550FF40011B9B9 /* XCRemoteSwiftPackageReference "ShrimpExtensions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kamaal111/ShrimpExtensions.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		2C9F03662854B81A00251D96 /* PokeAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PokeAPI;
+		};
+		2CEA34E128550F060011B9B9 /* UrlImageView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CEA34E028550F060011B9B9 /* XCRemoteSwiftPackageReference "UrlImageView" */;
+			productName = UrlImageView;
+		};
+		2CEA34E428550FF40011B9B9 /* ShrimpExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CEA34E328550FF40011B9B9 /* XCRemoteSwiftPackageReference "ShrimpExtensions" */;
+			productName = ShrimpExtensions;
 		};
 /* End XCSwiftPackageProductDependency section */
 

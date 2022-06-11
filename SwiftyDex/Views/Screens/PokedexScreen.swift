@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import UrlImageView
+import ShrimpExtensions
 
 struct PokedexScreen: View {
     @EnvironmentObject private var pokemonModel: PokemonModel
 
     var body: some View {
         Form {
-            ForEach(pokemonModel.pokemonEntries, id: \.self) { entry in
-                Text(entry.pokemonSpecies.name)
+            ForEach(pokemonModel.pokemons, id: \.self) { pokemon in
+                HStack {
+                    UrlImageView(imageUrl: pokemon.imageURL, imageSize: .squared(60))
+                    Text(pokemon.name)
+                }
             }
         }
         .onAppear(perform: {
