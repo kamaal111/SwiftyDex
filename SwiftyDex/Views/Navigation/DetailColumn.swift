@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct DetailColumn: View {
-    @Binding var selection: Panel?
+    @Binding var selection: Navigator.Screens?
 
     var body: some View {
-        switch selection ?? .allPokemons {
-        case .allPokemons:
-            AllPokemonsScreen()
+        switch selection {
+        case .none, .pokedex:
+            PokedexScreen()
         }
     }
 }
 
 struct DetailColumn_Previews: PreviewProvider {
     static var previews: some View {
-        DetailColumn(selection: .constant(.allPokemons))
+        DetailColumn(selection: .constant(.pokedex))
     }
 }

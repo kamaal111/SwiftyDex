@@ -14,10 +14,11 @@
 		2C30BA9E28527D3E00553121 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C30BA9D28527D3E00553121 /* Assets.xcassets */; };
 		2C30BAA228527D3E00553121 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C30BAA128527D3E00553121 /* Preview Assets.xcassets */; };
 		2C9F03672854B81A00251D96 /* PokeAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 2C9F03662854B81A00251D96 /* PokeAPI */; };
-		2C9F03712854C4B900251D96 /* AllPokemonsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F03702854C4B900251D96 /* AllPokemonsScreen.swift */; };
+		2C9F03712854C4B900251D96 /* PokedexScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F03702854C4B900251D96 /* PokedexScreen.swift */; };
 		2C9F03742854C60B00251D96 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F03732854C60B00251D96 /* Sidebar.swift */; };
 		2C9F03762854C6BC00251D96 /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F03752854C6BC00251D96 /* DetailColumn.swift */; };
 		2C9F03792854CB7900251D96 /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F03782854CB7900251D96 /* PokemonModel.swift */; };
+		2CFC54712854FED2006CDB11 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC54702854FED2006CDB11 /* Navigator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,10 +31,11 @@
 		2C30BA9F28527D3E00553121 /* SwiftyDex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftyDex.entitlements; sourceTree = "<group>"; };
 		2C30BAA128527D3E00553121 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2C9F03642854B4CC00251D96 /* PokeAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PokeAPI; sourceTree = "<group>"; };
-		2C9F03702854C4B900251D96 /* AllPokemonsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonsScreen.swift; sourceTree = "<group>"; };
+		2C9F03702854C4B900251D96 /* PokedexScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexScreen.swift; sourceTree = "<group>"; };
 		2C9F03732854C60B00251D96 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		2C9F03752854C6BC00251D96 /* DetailColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailColumn.swift; sourceTree = "<group>"; };
 		2C9F03782854CB7900251D96 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
+		2CFC54702854FED2006CDB11 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +143,7 @@
 		2C9F036F2854C4AC00251D96 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				2C9F03702854C4B900251D96 /* AllPokemonsScreen.swift */,
+				2C9F03702854C4B900251D96 /* PokedexScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -158,6 +160,7 @@
 		2C9F03772854CB4B00251D96 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				2CFC54702854FED2006CDB11 /* Navigator.swift */,
 				2C9F03782854CB7900251D96 /* PokemonModel.swift */,
 			);
 			path = ViewModels;
@@ -261,7 +264,8 @@
 			files = (
 				2C30BA9528527D3C00553121 /* SwiftyDexApp.swift in Sources */,
 				2C9F03762854C6BC00251D96 /* DetailColumn.swift in Sources */,
-				2C9F03712854C4B900251D96 /* AllPokemonsScreen.swift in Sources */,
+				2CFC54712854FED2006CDB11 /* Navigator.swift in Sources */,
+				2C9F03712854C4B900251D96 /* PokedexScreen.swift in Sources */,
 				2C30BA9A28527D3C00553121 /* SwiftyDex.xcdatamodeld in Sources */,
 				2C30BA9C28527D3C00553121 /* ContentView.swift in Sources */,
 				2C9F03742854C60B00251D96 /* Sidebar.swift in Sources */,

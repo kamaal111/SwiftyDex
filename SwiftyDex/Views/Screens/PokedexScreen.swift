@@ -1,5 +1,5 @@
 //
-//  AllPokemonsScreen.swift
+//  PokedexScreen.swift
 //  SwiftyDex
 //
 //  Created by Kamaal Farah on 11/06/2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AllPokemonsScreen: View {
+struct PokedexScreen: View {
     @EnvironmentObject private var pokemonModel: PokemonModel
 
     var body: some View {
@@ -24,8 +24,8 @@ struct AllPokemonsScreen: View {
     }
 }
 
-struct AllPokemonsScreen_Previews: PreviewProvider {
+struct PokedexScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AllPokemonsScreen()
+        PokedexScreen()
     }
 }

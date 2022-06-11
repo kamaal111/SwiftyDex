@@ -9,15 +9,12 @@ import SwiftUI
 
 @main
 struct SwiftyDexApp: App {
-    @StateObject private var pokemonModel = PokemonModel()
-
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(pokemonModel)
         }
     }
 }
