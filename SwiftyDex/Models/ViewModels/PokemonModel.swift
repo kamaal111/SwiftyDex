@@ -27,11 +27,11 @@ final class PokemonModel: ObservableObject {
         let pokedexResponse: PokedexResponse
         let pokedexResult = await pokeAPI.pokedex.getPokedex(by: .kanto)
         switch pokedexResult {
-        case .failure(let failure):
+        case let .failure(failure):
             // TODO: HANDLE ERROR
             print(failure)
             return
-        case .success(let success):
+        case let .success(success):
             pokedexResponse = success
         }
 

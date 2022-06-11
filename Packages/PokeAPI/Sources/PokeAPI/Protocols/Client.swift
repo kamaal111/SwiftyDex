@@ -1,6 +1,6 @@
 //
 //  Client.swift
-//  
+//
 //
 //  Created by Kamaal Farah on 11/06/2022.
 //
@@ -25,11 +25,11 @@ public enum ClientErrors: Error, Equatable {
 
     private var identifier: String {
         switch self {
-        case .generalError(error: let error): return "general_error_\(error.localizedDescription)"
-        case .responseError(message: let message, code: let code): return "response_error_\(message)_\(code)"
+        case let .generalError(error: error): return "general_error_\(error.localizedDescription)"
+        case let .responseError(message: message, code: code): return "response_error_\(message)_\(code)"
         case .notAValidJSON: return "not_a_valid_json"
-        case .parsingError(error: let error): return "parsing_error_\(error.localizedDescription)"
-        case .invalidURL(url: let url): return "invalid_url_\(url)"
+        case let .parsingError(error: error): return "parsing_error_\(error.localizedDescription)"
+        case let .invalidURL(url: url): return "invalid_url_\(url)"
         }
     }
 }
@@ -43,15 +43,15 @@ extension Client {
 
     private func mapError(_ error: XiphiasNet.Errors) -> ClientErrors {
         switch error {
-        case .generalError(error: let error):
+        case let .generalError(error: error):
             return .generalError(error: error)
-        case .responseError(message: let message, code: let code):
+        case let .responseError(message: message, code: code):
             return .responseError(message: message, code: code)
         case .notAValidJSON:
             return .notAValidJSON
-        case .parsingError(error: let error):
+        case let .parsingError(error: error):
             return .parsingError(error: error)
-        case .invalidURL(url: let url):
+        case let .invalidURL(url: url):
             return .invalidURL(url: url)
         }
     }

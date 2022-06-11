@@ -7,12 +7,13 @@ let package = Package(
     name: "PokeAPI",
     platforms: [
         .iOS(.v13),
-        .macOS(.v10_15)
+        .macOS(.v10_15),
     ],
     products: [
         .library(
             name: "PokeAPI",
-            targets: ["PokeAPI"]),
+            targets: ["PokeAPI"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/kamaal111/XiphiasNet.git", "7.0.0" ..< "8.0.0"),
@@ -22,9 +23,11 @@ let package = Package(
             name: "PokeAPI",
             dependencies: [
                 "XiphiasNet",
-            ]),
+            ]
+        ),
         .testTarget(
             name: "PokeAPITests",
-            dependencies: ["PokeAPI"]),
+            dependencies: ["PokeAPI"]
+        ),
     ]
 )

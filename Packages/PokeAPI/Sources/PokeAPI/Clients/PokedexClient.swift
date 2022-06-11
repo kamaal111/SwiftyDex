@@ -1,6 +1,6 @@
 //
 //  PokedexClient.swift
-//  
+//
 //
 //  Created by Kamaal Farah on 11/06/2022.
 //
@@ -28,10 +28,10 @@ public struct PokedexClient: Client {
     }
 }
 
-private extension Endpoint {
-    static let pokedex = Endpoint(path: "/pokedex", queryItems: [])
+extension Endpoint {
+    fileprivate static let pokedex = Endpoint(path: "/pokedex", queryItems: [])
 
-    static func pokedex(id: Int) -> Self {
+    fileprivate static func pokedex(id: Int) -> Self {
         .init(path: "/pokedex/\(id)", queryItems: [])
     }
 }

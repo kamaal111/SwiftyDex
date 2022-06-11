@@ -1,6 +1,6 @@
 //
 //  PokemonClient.swift
-//  
+//
 //
 //  Created by Kamaal Farah on 11/06/2022.
 //
@@ -20,6 +20,6 @@ public struct PokemonClient: Client {
     }
 }
 
-private extension Endpoint {
-    static let pokemon = Endpoint(path: "/pokemon", queryItems: [])
+extension Endpoint {
+    fileprivate static let pokemon = Endpoint(path: "/pokemon", queryItems: [])
 }
