@@ -13,6 +13,7 @@
 		2C30BA9C28527D3C00553121 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30BA9B28527D3C00553121 /* ContentView.swift */; };
 		2C30BA9E28527D3E00553121 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C30BA9D28527D3E00553121 /* Assets.xcassets */; };
 		2C30BAA228527D3E00553121 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C30BAA128527D3E00553121 /* Preview Assets.xcassets */; };
+		2C9F03672854B81A00251D96 /* PokeAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 2C9F03662854B81A00251D96 /* PokeAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2C30BA9D28527D3E00553121 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C30BA9F28527D3E00553121 /* SwiftyDex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftyDex.entitlements; sourceTree = "<group>"; };
 		2C30BAA128527D3E00553121 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2C9F03642854B4CC00251D96 /* PokeAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PokeAPI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C9F03672854B81A00251D96 /* PokeAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +43,10 @@
 		2C30BA8828527D3C00553121 = {
 			isa = PBXGroup;
 			children = (
-				2C30BA9328527D3C00553121 /* SwiftyDex */,
+				2C9F03652854B81A00251D96 /* Frameworks */,
+				2C9F03632854B45B00251D96 /* Packages */,
 				2C30BA9228527D3C00553121 /* Products */,
+				2C30BA9328527D3C00553121 /* SwiftyDex */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +80,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		2C9F03632854B45B00251D96 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				2C9F03642854B4CC00251D96 /* PokeAPI */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		2C9F03652854B81A00251D96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -92,6 +112,9 @@
 			dependencies = (
 			);
 			name = SwiftyDex;
+			packageProductDependencies = (
+				2C9F03662854B81A00251D96 /* PokeAPI */,
+			);
 			productName = SwiftyDex;
 			productReference = 2C30BA9128527D3C00553121 /* SwiftyDex.app */;
 			productType = "com.apple.product-type.application";
@@ -373,6 +396,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2C9F03662854B81A00251D96 /* PokeAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PokeAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2C30BA9828527D3C00553121 /* SwiftyDex.xcdatamodeld */ = {
