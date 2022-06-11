@@ -21,7 +21,7 @@ final class Navigator: ObservableObject {
         var title: String {
             switch self {
             case .pokedex:
-                return "Pokedex"
+                return "Kanto Pokedex"
             }
         }
 

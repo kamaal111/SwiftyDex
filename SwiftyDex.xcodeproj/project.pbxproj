@@ -21,6 +21,7 @@
 		2CEA34E228550F060011B9B9 /* UrlImageView in Frameworks */ = {isa = PBXBuildFile; productRef = 2CEA34E128550F060011B9B9 /* UrlImageView */; };
 		2CEA34E528550FF40011B9B9 /* ShrimpExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2CEA34E428550FF40011B9B9 /* ShrimpExtensions */; };
 		2CEA34E82855111D0011B9B9 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA34E72855111D0011B9B9 /* Pokemon.swift */; };
+		2CEA34EB28551B850011B9B9 /* SalmonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2CEA34EA28551B850011B9B9 /* SalmonUI */; };
 		2CFC54712854FED2006CDB11 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC54702854FED2006CDB11 /* Navigator.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CEA34EB28551B850011B9B9 /* SalmonUI in Frameworks */,
 				2C9F03672854B81A00251D96 /* PokeAPI in Frameworks */,
 				2CEA34E528550FF40011B9B9 /* ShrimpExtensions in Frameworks */,
 				2CEA34E228550F060011B9B9 /* UrlImageView in Frameworks */,
@@ -202,6 +204,7 @@
 				2C9F03662854B81A00251D96 /* PokeAPI */,
 				2CEA34E128550F060011B9B9 /* UrlImageView */,
 				2CEA34E428550FF40011B9B9 /* ShrimpExtensions */,
+				2CEA34EA28551B850011B9B9 /* SalmonUI */,
 			);
 			productName = SwiftyDex;
 			productReference = 2C30BA9128527D3C00553121 /* SwiftyDex.app */;
@@ -234,6 +237,7 @@
 			packageReferences = (
 				2CEA34E028550F060011B9B9 /* XCRemoteSwiftPackageReference "UrlImageView" */,
 				2CEA34E328550FF40011B9B9 /* XCRemoteSwiftPackageReference "ShrimpExtensions" */,
+				2CEA34E928551B850011B9B9 /* XCRemoteSwiftPackageReference "SalmonUI" */,
 			);
 			productRefGroup = 2C30BA9228527D3C00553121 /* Products */;
 			projectDirPath = "";
@@ -512,6 +516,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		2CEA34E928551B850011B9B9 /* XCRemoteSwiftPackageReference "SalmonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kamaal111/SalmonUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -528,6 +540,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2CEA34E328550FF40011B9B9 /* XCRemoteSwiftPackageReference "ShrimpExtensions" */;
 			productName = ShrimpExtensions;
+		};
+		2CEA34EA28551B850011B9B9 /* SalmonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CEA34E928551B850011B9B9 /* XCRemoteSwiftPackageReference "SalmonUI" */;
+			productName = SalmonUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 
