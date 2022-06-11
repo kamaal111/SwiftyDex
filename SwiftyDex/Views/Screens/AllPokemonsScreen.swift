@@ -13,7 +13,7 @@ struct AllPokemonsScreen: View {
     var body: some View {
         Form {
             ForEach(pokemonModel.pokemonEntries, id: \.self) { entry in
-                Text(entry.name)
+                Text(entry.pokemonSpecies.name)
             }
         }
         .onAppear(perform: {

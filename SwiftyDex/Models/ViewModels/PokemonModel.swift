@@ -9,7 +9,7 @@ import Foundation
 import PokeAPI
 
 final class PokemonModel: ObservableObject {
-    @Published var pokemonEntries: [PokemonEntry] = []
+    @Published var pokemonEntries: [PokedexResponse.PokemonEntry] = []
 
     private let pokeAPI: PokeAPI
 
@@ -24,22 +24,22 @@ final class PokemonModel: ObservableObject {
 
         gotInitialPokemonEntries = true
 
-        let pokemonEntriesResponse: PaginatedResponse<PokemonEntry>
-        let pokemonEntriesResult = await pokeAPI.pokemon.getPokemonEntries()
-        switch pokemonEntriesResult {
+        let pokedexResponse: PokedexResponse
+        let pokedexResult = await pokeAPI.pokedex.getPokedex(by: .kanto)
+        switch pokedexResult {
         case .failure(let failure):
             // TODO: HANDLE ERROR
             print(failure)
             return
         case .success(let success):
-            pokemonEntriesResponse = success
+            pokedexResponse = success
         }
 
-        await setPokemonEntries(pokemonEntriesResponse.results)
+        await setPokemonEntries(pokedexResponse.pokemonEntries)
     }
 
     @MainActor
-    private func setPokemonEntries(_ pokemonEntries: [PokemonEntry]) {
+    private func setPokemonEntries(_ pokemonEntries: [PokedexResponse.PokemonEntry]) {
         self.pokemonEntries = pokemonEntries
     }
 }

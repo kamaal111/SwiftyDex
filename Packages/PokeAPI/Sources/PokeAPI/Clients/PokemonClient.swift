@@ -15,11 +15,11 @@ public struct PokemonClient: Client {
         self.networker = networker
     }
 
-    public func getPokemonEntries() async -> Result<PaginatedResponse<PokemonEntry>, ClientErrors> {
+    public func getPokemonEntries() async -> Result<PaginatedResponse<ResponseEntry>, ClientErrors> {
         await getRequest(from: .pokemon)
     }
 }
 
-extension Endpoint {
+private extension Endpoint {
     static let pokemon = Endpoint(path: "/pokemon", queryItems: [])
 }
