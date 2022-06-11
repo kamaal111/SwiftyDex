@@ -8,12 +8,12 @@
 import SwiftUI
 
 enum Panel: Hashable {
-    case home
+    case allPokemons
 }
 
 struct ContentView: View {
     @State private var path = NavigationPath()
-    @State private var selection: Panel? = Panel.home
+    @State private var selection: Panel? = Panel.allPokemons
 
     var body: some View {
         NavigationSplitView {

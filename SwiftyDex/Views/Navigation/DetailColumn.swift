@@ -11,15 +11,15 @@ struct DetailColumn: View {
     @Binding var selection: Panel?
 
     var body: some View {
-        switch selection ?? .home {
-        case .home:
-            HomeScreen()
+        switch selection ?? .allPokemons {
+        case .allPokemons:
+            AllPokemonsScreen()
         }
     }
 }
 
 struct DetailColumn_Previews: PreviewProvider {
     static var previews: some View {
-        DetailColumn(selection: .constant(.home))
+        DetailColumn(selection: .constant(.allPokemons))
     }
 }

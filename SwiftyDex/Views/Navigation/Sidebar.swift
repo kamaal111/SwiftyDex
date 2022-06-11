@@ -12,7 +12,7 @@ struct Sidebar: View {
 
     var body: some View {
         List(selection: $selection) {
-            NavigationLink(value: Panel.home) {
+            NavigationLink(value: Panel.allPokemons) {
                 Label("Home", systemImage: "box.truck")
             }
         }
@@ -21,6 +21,6 @@ struct Sidebar: View {
 
 struct Sidebar_Previews: PreviewProvider {
     static var previews: some View {
-        Sidebar(selection: .constant(.home))
+        Sidebar(selection: .constant(.allPokemons))
     }
 }
