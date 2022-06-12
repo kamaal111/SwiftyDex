@@ -25,7 +25,7 @@ final class PokemonModel: ObservableObject {
         gotInitialPokemonEntries = true
 
         let pokedexResponse: PokedexResponse
-        let pokedexResult = await pokeAPI.pokedex.getPokedex(by: .kanto)
+        let pokedexResult = await pokeAPI.pokedex.getPokedex(by: .kanto, sample: true)
         switch pokedexResult {
         case let .failure(failure):
             // TODO: HANDLE ERROR

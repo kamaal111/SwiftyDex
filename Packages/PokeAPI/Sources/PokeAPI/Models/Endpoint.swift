@@ -16,7 +16,10 @@ struct Endpoint {
         components.scheme = "https"
         components.host = "pokeapi.co"
         components.path = "/api/v2\(path)"
-        components.queryItems = queryItems
+
+        if !queryItems.isEmpty {
+            components.queryItems = queryItems
+        }
 
         return components.url
     }

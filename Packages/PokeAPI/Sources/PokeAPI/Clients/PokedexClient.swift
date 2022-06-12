@@ -19,12 +19,15 @@ public struct PokedexClient: Client {
         await getRequest(from: .pokedex)
     }
 
-    public func getPokedex(by id: Int) async -> Result<PokedexResponse, ClientErrors> {
-        await getRequest(from: .pokedex(id: id))
+    public func getPokedex(by id: Int, sample: Bool = false) async -> Result<PokedexResponse, ClientErrors> {
+        if sample {
+            return .success(.sample)
+        }
+        return await getRequest(from: .pokedex(id: id))
     }
 
-    public func getPokedex(by region: Regions) async -> Result<PokedexResponse, ClientErrors> {
-        await getPokedex(by: region.id)
+    public func getPokedex(by region: Regions, sample: Bool = false) async -> Result<PokedexResponse, ClientErrors> {
+        await getPokedex(by: region.id, sample: sample)
     }
 }
 
