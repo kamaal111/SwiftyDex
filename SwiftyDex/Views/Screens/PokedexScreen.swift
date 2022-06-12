@@ -20,6 +20,7 @@ struct PokedexScreen: View {
                         VStack {
                             PokedexItemView(pokemon: pokemon, action: { pokemon in
                                 viewModel.pokedexItemAction(pokemon)
+                                Task { await pokemonModel.getPokemonDetails(pokemon) }
                             })
                             Divider()
                         }
