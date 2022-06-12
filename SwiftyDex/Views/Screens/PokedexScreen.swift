@@ -29,13 +29,9 @@ struct PokedexScreen: View {
             }
         }
         .sheet(isPresented: $viewModel.showPokemonSheet, content: {
-            ZStack {
-                if let selectedPokemon = viewModel.selectedPokemon {
-                    Text(selectedPokemon.name)
-                }
-            }
-            .presentationDetents([.height(250), .medium])
-            .presentationDragIndicator(.visible)
+            PokemonDetailsSheet(selectedPokemon: viewModel.selectedPokemon)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
         })
         .onAppear(perform: handleOnAppear)
         .navigationTitle(Text("Kanto Pokedex"))
@@ -83,5 +79,6 @@ extension PokedexScreen {
 struct PokedexScreen_Previews: PreviewProvider {
     static var previews: some View {
         PokedexScreen()
+            .environmentObject(PokemonModel(preview: true))
     }
 }

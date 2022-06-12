@@ -7,8 +7,6 @@
 
 import SwiftUI
 import SalmonUI
-import UrlImageView
-import ShrimpExtensions
 
 struct PokedexItemView: View {
     let pokemon: Pokemon
@@ -17,7 +15,7 @@ struct PokedexItemView: View {
     var body: some View {
         Button(action: { action(pokemon) }) {
             HStack {
-                UrlImageView(imageUrl: pokemon.imageURL, imageSize: .squared(60))
+                PokemonProfileImage(pokemon: pokemon, size: 60)
                 VStack(alignment: .leading) {
                     Text(pokemon.name.capitalized)
                         .bold()
@@ -34,5 +32,6 @@ struct PokedexItemView: View {
 struct PokedexItemView_Previews: PreviewProvider {
     static var previews: some View {
         PokedexItemView(pokemon: .init(name: "bulbasaur", pokedexNumber: 1), action: { _ in })
+            .padding(.all, 16)
     }
 }

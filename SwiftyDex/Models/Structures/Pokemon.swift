@@ -16,7 +16,7 @@ struct Pokemon: Hashable {
     }
 
     var formattedPokedexNumber: String {
-        "# \(String(pokedexNumber).leftPadding(toLength: 3, withPad: "0"))"
+        "#\(String(pokedexNumber).leftPadding(toLength: 3, withPad: "0"))"
     }
 }
 
