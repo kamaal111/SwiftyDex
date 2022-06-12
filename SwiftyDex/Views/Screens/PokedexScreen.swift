@@ -10,13 +10,17 @@ import SwiftUI
 struct PokedexScreen: View {
     @EnvironmentObject private var pokemonModel: PokemonModel
 
+    @StateObject private var viewModel = ViewModel()
+
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack {
                     ForEach(pokemonModel.pokemons, id: \.self) { pokemon in
                         VStack {
-                            PokedexItemView(pokemon: pokemon, action: pokedexItemAction)
+                            PokedexItemView(pokemon: pokemon, action: { pokemon in
+                                viewModel.pokedexItemAction(pokemon)
+                            })
                             Divider()
                         }
                     }
@@ -24,6 +28,15 @@ struct PokedexScreen: View {
                 .padding(.horizontal, 16)
             }
         }
+        .sheet(isPresented: $viewModel.showPokemonSheet, content: {
+            ZStack {
+                if let selectedPokemon = viewModel.selectedPokemon {
+                    Text(selectedPokemon.name)
+                }
+            }
+            .presentationDetents([.height(250), .medium])
+            .presentationDragIndicator(.visible)
+        })
         .onAppear(perform: handleOnAppear)
         .navigationTitle(Text("Kanto Pokedex"))
         #if os(iOS)
@@ -31,13 +44,38 @@ struct PokedexScreen: View {
         #endif
     }
 
-    private func pokedexItemAction(_ pokemon: Pokemon) {
-        print(pokemon)
-    }
-
     private func handleOnAppear() {
-        Task {
-            await pokemonModel.getInitialPokemonEntries()
+        Task { await pokemonModel.getInitialPokemonEntries() }
+    }
+}
+
+extension PokedexScreen {
+    final class ViewModel: ObservableObject {
+        @Published var showPokemonSheet = false {
+            didSet { Task { await showPokemonSheetDidSet() } }
+        }
+
+        @Published private(set) var selectedPokemon: Pokemon? {
+            didSet { Task { await selectedPokemonDidSet() } }
+        }
+
+        @MainActor
+        func pokedexItemAction(_ pokemon: Pokemon) {
+            selectedPokemon = pokemon
+        }
+
+        @MainActor
+        private func selectedPokemonDidSet() {
+            if selectedPokemon != nil {
+                showPokemonSheet = true
+            }
+        }
+
+        @MainActor
+        private func showPokemonSheetDidSet() {
+            if !showPokemonSheet {
+                selectedPokemon = nil
+            }
         }
     }
 }
