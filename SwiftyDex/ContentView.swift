@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var pokemonModel = PokemonModel()
+    @StateObject private var pokemonModel = PokemonModel(preview: true)
     @StateObject private var navigator = Navigator()
 
     var body: some View {

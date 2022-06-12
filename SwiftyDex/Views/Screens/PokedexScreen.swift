@@ -6,9 +6,6 @@
 //
 
 import SwiftUI
-import SalmonUI
-import UrlImageView
-import ShrimpExtensions
 
 struct PokedexScreen: View {
     @EnvironmentObject private var pokemonModel: PokemonModel
@@ -18,28 +15,30 @@ struct PokedexScreen: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack {
                     ForEach(pokemonModel.pokemons, id: \.self) { pokemon in
-                        HStack {
-                            UrlImageView(imageUrl: pokemon.imageURL, imageSize: .squared(60))
-                            VStack(alignment: .leading) {
-                                Text(pokemon.name.capitalized)
-                                    .bold()
-                                Text(pokemon.formattedPokedexNumber)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
+                        VStack {
+                            PokedexItemView(pokemon: pokemon, action: pokedexItemAction)
+                            Divider()
                         }
-                        .ktakeWidthEagerly(alignment: .leading)
                     }
                 }
                 .padding(.horizontal, 16)
             }
         }
-        .onAppear(perform: {
-            Task {
-                await pokemonModel.getInitialPokemonEntries()
-            }
-        })
+        .onAppear(perform: handleOnAppear)
         .navigationTitle(Text("Kanto Pokedex"))
+        #if os(iOS)
+            .navigationBarTitleDisplayMode(.large)
+        #endif
+    }
+
+    private func pokedexItemAction(_ pokemon: Pokemon) {
+        print(pokemon)
+    }
+
+    private func handleOnAppear() {
+        Task {
+            await pokemonModel.getInitialPokemonEntries()
+        }
     }
 }
 
