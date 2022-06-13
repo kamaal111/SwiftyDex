@@ -18,9 +18,11 @@ struct PokedexScreen: View {
                 LazyVStack {
                     ForEach(pokemonModel.pokemons, id: \.self) { pokemon in
                         VStack {
-                            PokedexItemView(pokemon: pokemon, action: { pokemon in
-                                viewModel.pokedexItemAction(pokemon)
-                                Task { await pokemonModel.getPokemonDetails(pokemon) }
+                            PokedexItemView(pokemon: pokemon, action: { _ in
+                                Task {
+                                    await viewModel.pokedexItemAction(pokemon)
+                                    await pokemonModel.getPokemonDetails(pokemon)
+                                }
                             })
                             Divider()
                         }
@@ -34,8 +36,14 @@ struct PokedexScreen: View {
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
         })
-        .onAppear(perform: handleOnAppear)
         .navigationTitle(Text("Kanto Pokedex"))
+        .onAppear(perform: handleOnAppear)
+        .onChange(of: pokemonModel.pokemons, perform: { _ in
+            guard let selectedPokemon = viewModel.selectedPokemon,
+                    let editedPokemon = pokemonModel.pokemons.first(where: { $0.pokedexNumber == selectedPokemon.pokedexNumber }) else { return }
+
+            viewModel.setSelectedPokemon(editedPokemon)
+        })
         #if os(iOS)
             .navigationBarTitleDisplayMode(.large)
         #endif
@@ -57,8 +65,12 @@ extension PokedexScreen {
         }
 
         @MainActor
-        func pokedexItemAction(_ pokemon: Pokemon) {
+        func setSelectedPokemon(_ pokemon: Pokemon) {
             selectedPokemon = pokemon
+        }
+
+        func pokedexItemAction(_ pokemon: Pokemon) async {
+            await setSelectedPokemon(pokemon)
         }
 
         @MainActor

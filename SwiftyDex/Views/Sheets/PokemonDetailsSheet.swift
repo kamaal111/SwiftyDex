@@ -24,7 +24,12 @@ struct PokemonDetailsSheet: View {
                             Text(selectedPokemon.name.capitalized)
                                 .font(.headline)
                         }
-                        PokemonProfileImage(pokemon: selectedPokemon, size: proxy.size.width / 1.5)
+                        PokemonProfileImage(pokemon: selectedPokemon, size: proxy.size.width / 1.5, withBorder: false)
+                        HStack {
+                            ForEach(selectedPokemon.pokemonTypes, id: \.self) { type in
+                                PokemonTypeView(type: type)
+                            }
+                        }
                     }
                     .ktakeWidthEagerly()
                 })
@@ -36,6 +41,6 @@ struct PokemonDetailsSheet: View {
 
 struct PokemonDetailsSheet_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonDetailsSheet(selectedPokemon: .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]))
+        PokemonDetailsSheet(selectedPokemon: .init(name: "charizord", pokedexNumber: 6, pokemonTypes: ["fire", "flying"]))
     }
 }

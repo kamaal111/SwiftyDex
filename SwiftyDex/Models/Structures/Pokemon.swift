@@ -10,7 +10,17 @@ import Foundation
 struct Pokemon: Hashable {
     let name: String
     let pokedexNumber: Int
-    let pokemonTypes: [String]
+    let pokemonTypes: [PokemonTypes]
+
+    init(name: String, pokedexNumber: Int, pokemonTypes: [String]) {
+        self.init(name: name, pokedexNumber: pokedexNumber, pokemonTypes: pokemonTypes.compactMap({ PokemonTypes(rawValue: $0) }))
+    }
+
+    private init(name: String, pokedexNumber: Int, pokemonTypes: [PokemonTypes]) {
+        self.name = name
+        self.pokedexNumber = pokedexNumber
+        self.pokemonTypes = pokemonTypes
+    }
 
     var imageURL: URL? {
         URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(pokedexNumber).png")
