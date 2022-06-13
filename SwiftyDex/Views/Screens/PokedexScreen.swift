@@ -21,7 +21,7 @@ struct PokedexScreen: View {
                             PokedexItemView(pokemon: pokemon, action: { _ in
                                 Task {
                                     await viewModel.pokedexItemAction(pokemon)
-                                    await pokemonModel.getPokemonDetails(pokemon)
+                                    await pokemonModel.getPokemonDetails(of: pokemon)
                                 }
                             })
                             Divider()
@@ -91,7 +91,9 @@ extension PokedexScreen {
 
 struct PokedexScreen_Previews: PreviewProvider {
     static var previews: some View {
-        PokedexScreen()
-            .environmentObject(PokemonModel(preview: true))
+        NavigationStack {
+            PokedexScreen()
+        }
+        .environmentObject(PokemonModel(preview: true))
     }
 }

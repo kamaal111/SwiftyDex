@@ -48,7 +48,7 @@ final class PokemonModel: NSObject, ObservableObject {
         await setPokemons(pokemons)
     }
 
-    func getPokemonDetails(_ pokemon: Pokemon) async {
+    func getPokemonDetails(of pokemon: Pokemon) async {
         guard !pokemonDetailsFetched.contains(pokemon.pokedexNumber),
               let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) else { return }
 
