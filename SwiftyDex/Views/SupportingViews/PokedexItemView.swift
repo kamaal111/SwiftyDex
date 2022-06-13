@@ -31,7 +31,7 @@ struct PokedexItemView: View {
 
 struct PokedexItemView_Previews: PreviewProvider {
     static var previews: some View {
-        PokedexItemView(pokemon: .init(name: "bulbasaur", pokedexNumber: 1), action: { _ in })
+        PokedexItemView(pokemon: .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]), action: { _ in })
             .padding(.all, 16)
     }
 }

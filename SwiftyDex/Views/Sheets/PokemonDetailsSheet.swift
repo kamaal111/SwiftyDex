@@ -36,6 +36,6 @@ struct PokemonDetailsSheet: View {
 
 struct PokemonDetailsSheet_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonDetailsSheet(selectedPokemon: .init(name: "bulbasaur", pokedexNumber: 1))
+        PokemonDetailsSheet(selectedPokemon: .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]))
     }
 }

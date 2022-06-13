@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO: DECODING NOT COMPLETE
 public struct PokemonDetails: Codable, Hashable, Identifiable {
     public let abilities: [Ability]
     public let baseExperience: Int
@@ -20,9 +21,11 @@ public struct PokemonDetails: Codable, Hashable, Identifiable {
     public let name: String
     public let order: Int
     public let species: ResponseEntry
-    public let sprites: [Sprite]
-//    public let held_items: [something]
-//    public let past_types: [something]
+    public let sprites: Sprites
+    public let stats: [Stats]
+    public let heldItems: [ResponseEntry]
+    public let types: [PokemonType]
+    public let pastTypes: [PastTypes]
 
     enum CodingKeys: String, CodingKey {
         case abilities
@@ -38,6 +41,10 @@ public struct PokemonDetails: Codable, Hashable, Identifiable {
         case order
         case species
         case sprites
+        case stats
+        case heldItems = "held_items"
+        case types
+        case pastTypes = "past_types"
     }
 
     public struct Ability: Codable, Hashable {
@@ -100,7 +107,7 @@ public struct PokemonDetails: Codable, Hashable, Identifiable {
         }
     }
 
-    public struct Sprite: Codable, Hashable {
+    public struct Sprites: Codable, Hashable {
         public let backDefault: URL
         public let backFemale: URL?
         public let backShiny: URL
@@ -108,6 +115,16 @@ public struct PokemonDetails: Codable, Hashable, Identifiable {
         public let frontDefault: URL
         public let frontFemale: URL?
         public let other: [String: [String: URL?]]
+
+        public init(backDefault: URL, backFemale: URL?, backShiny: URL, backShinyFemale: URL?, frontDefault: URL, frontFemale: URL?, other: [String : [String : URL?]]) {
+            self.backDefault = backDefault
+            self.backFemale = backFemale
+            self.backShiny = backShiny
+            self.backShinyFemale = backShinyFemale
+            self.frontDefault = frontDefault
+            self.frontFemale = frontFemale
+            self.other = other
+        }
 
         enum CodingKeys: String, CodingKey {
             case backDefault = "back_default"
@@ -117,6 +134,44 @@ public struct PokemonDetails: Codable, Hashable, Identifiable {
             case frontDefault = "front_default"
             case frontFemale = "front_female"
             case other
+        }
+    }
+
+    public struct Stats: Codable, Hashable {
+        public let baseStat: Int
+        public let effort: Int
+        public let stat: ResponseEntry
+
+        public init(baseStat: Int, effort: Int, stat: ResponseEntry) {
+            self.baseStat = baseStat
+            self.effort = effort
+            self.stat = stat
+        }
+
+        enum CodingKeys: String, CodingKey {
+            case baseStat = "base_stat"
+            case effort
+            case stat
+        }
+    }
+
+    public struct PokemonType: Codable, Hashable {
+        public let slot: Int
+        public let type: ResponseEntry
+
+        public init(slot: Int, type: ResponseEntry) {
+            self.slot = slot
+            self.type = type
+        }
+    }
+
+    public struct PastTypes: Codable, Hashable {
+        public let type: PokemonType
+        public let generation: ResponseEntry
+
+        public init(type: PokemonDetails.PokemonType, generation: ResponseEntry) {
+            self.type = type
+            self.generation = generation
         }
     }
 }

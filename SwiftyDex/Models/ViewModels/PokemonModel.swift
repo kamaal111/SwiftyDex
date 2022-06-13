@@ -40,15 +40,37 @@ final class PokemonModel: NSObject, ObservableObject {
 
         let pokemons = pokedexResponse.pokemonEntries
             .map {
-                Pokemon(name: $0.pokemonSpecies.name, pokedexNumber: $0.entryNumber)
+                Pokemon(name: $0.pokemonSpecies.name, pokedexNumber: $0.entryNumber, pokemonTypes: [])
             }
 
         await setPokemons(pokemons)
     }
 
     func getPokemonDetails(_ pokemon: Pokemon) async {
-//        guard let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) else { return }
+        guard let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) else { return }
+
+        let response: PokemonDetails
         let result = await pokeAPI.pokemon.getPokemonDetails(by: pokemon.pokedexNumber)
+        switch result {
+        case .failure(let failure):
+            // TODO: HANDLE ERROR
+            print(failure)
+            return
+        case .success(let success):
+            response = success
+        }
+
+        let pokemonTypes = response.types
+            .sorted(by: { $0.slot < $1.slot })
+            .map(\.type.name)
+        let pokemonWithTypes = Pokemon(name: pokemon.name, pokedexNumber: pokemon.pokedexNumber, pokemonTypes: pokemonTypes)
+
+        await replacePokemon(at: index, with: pokemonWithTypes)
+    }
+
+    @MainActor
+    private func replacePokemon(at index: Int, with pokemon: Pokemon) {
+        pokemons[index] = pokemon
     }
 
     @MainActor

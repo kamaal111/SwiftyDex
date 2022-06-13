@@ -10,6 +10,7 @@ import Foundation
 struct Pokemon: Hashable {
     let name: String
     let pokedexNumber: Int
+    let pokemonTypes: [String]
 
     var imageURL: URL? {
         URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(pokedexNumber).png")

@@ -25,6 +25,6 @@ struct PokemonProfileImage: View {
 
 struct PokemonProfileImage_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonProfileImage(pokemon: .init(name: "bulbasaur", pokedexNumber: 1), size: 60)
+        PokemonProfileImage(pokemon: .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]), size: 60)
     }
 }
