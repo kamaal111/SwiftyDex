@@ -32,8 +32,9 @@ final class PokemonModel: NSObject, ObservableObject {
         let pokedexResult = await pokeAPI.pokedex.getPokedex(by: .kanto, sample: preview)
         switch pokedexResult {
         case let .failure(failure):
-            // TODO: HANDLE ERROR
-            print(failure)
+            // TODO: HANDLE ERROR IN VIEW
+            logger.error("error while getting initial pokemons; \(failure.localizedDescription)")
+            gotInitialPokemonEntries = false
             return
         case let .success(success):
             pokedexResponse = success
@@ -55,8 +56,8 @@ final class PokemonModel: NSObject, ObservableObject {
         let result = await pokeAPI.pokemon.getPokemonDetails(by: pokemon.pokedexNumber)
         switch result {
         case .failure(let failure):
-            // TODO: HANDLE ERROR
-            print(failure)
+            // TODO: HANDLE ERROR IN VIEW
+            logger.error("error while getting pokemon details; \(failure.localizedDescription)")
             return
         case .success(let success):
             response = success
