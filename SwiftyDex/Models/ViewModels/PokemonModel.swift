@@ -42,7 +42,7 @@ final class PokemonModel: NSObject, ObservableObject {
 
         let pokemons = pokedexResponse.pokemonEntries
             .map {
-                Pokemon(name: $0.pokemonSpecies.name, pokedexNumber: $0.entryNumber, pokemonTypes: [])
+                Pokemon(name: $0.pokemonSpecies.name ?? "", pokedexNumber: $0.entryNumber, pokemonTypes: [])
             }
 
         await setPokemons(pokemons)
@@ -57,6 +57,9 @@ final class PokemonModel: NSObject, ObservableObject {
         switch result {
         case .failure(let failure):
             // TODO: HANDLE ERROR IN VIEW
+            #if DEBUG
+            print("failure", failure)
+            #endif
             logger.error("error while getting pokemon details; \(failure.localizedDescription)")
             return
         case .success(let success):
@@ -67,7 +70,7 @@ final class PokemonModel: NSObject, ObservableObject {
 
         let pokemonTypes = response.types
             .sorted(by: { $0.slot < $1.slot })
-            .map(\.type.name)
+            .compactMap(\.type.name)
         let pokemonWithTypes = Pokemon(name: pokemon.name, pokedexNumber: pokemon.pokedexNumber, pokemonTypes: pokemonTypes)
 
         await replacePokemon(at: index, with: pokemonWithTypes)
