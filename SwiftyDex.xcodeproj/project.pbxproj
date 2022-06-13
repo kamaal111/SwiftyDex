@@ -48,6 +48,7 @@
 		2C9F03782854CB7900251D96 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		2CB7A57F2857AE5A001CD00E /* PokemonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonType.swift; sourceTree = "<group>"; };
 		2CB7A5812857B50A001CD00E /* PokemonTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTypeView.swift; sourceTree = "<group>"; };
+		2CB7A5832857BE23001CD00E /* SimpleAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SimpleAPI; sourceTree = "<group>"; };
 		2CEA34E72855111D0011B9B9 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		2CFC5265285641AD00180A98 /* PokedexItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexItemView.swift; sourceTree = "<group>"; };
 		2CFC54702854FED2006CDB11 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 		2C30BA8828527D3C00553121 = {
 			isa = PBXGroup;
 			children = (
+				2CB7A5832857BE23001CD00E /* SimpleAPI */,
 				2C9F03652854B81A00251D96 /* Frameworks */,
 				2C9F03632854B45B00251D96 /* Packages */,
 				2C30BA9228527D3C00553121 /* Products */,
