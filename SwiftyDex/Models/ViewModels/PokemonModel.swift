@@ -15,6 +15,7 @@ final class PokemonModel: NSObject, ObservableObject {
     private let pokeAPI: PokeAPI
     private var gotInitialPokemonEntries = false
     private let preview: Bool
+    private var pokemonDetailsFetched: [Int] = []
 
     init(preview: Bool = false) {
         self.pokeAPI = .init()
@@ -47,7 +48,8 @@ final class PokemonModel: NSObject, ObservableObject {
     }
 
     func getPokemonDetails(_ pokemon: Pokemon) async {
-        guard let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) else { return }
+        guard !pokemonDetailsFetched.contains(pokemon.pokedexNumber),
+              let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) else { return }
 
         let response: PokemonDetails
         let result = await pokeAPI.pokemon.getPokemonDetails(by: pokemon.pokedexNumber)
@@ -59,6 +61,8 @@ final class PokemonModel: NSObject, ObservableObject {
         case .success(let success):
             response = success
         }
+
+        pokemonDetailsFetched.append(pokemon.pokedexNumber)
 
         let pokemonTypes = response.types
             .sorted(by: { $0.slot < $1.slot })
