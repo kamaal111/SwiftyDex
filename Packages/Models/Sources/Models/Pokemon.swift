@@ -1,18 +1,18 @@
 //
 //  Pokemon.swift
-//  SwiftyDex
+//  
 //
-//  Created by Kamaal M Farah on 11/06/2022.
+//  Created by Kamaal Farah on 14/06/2022.
 //
 
 import Foundation
 
-struct Pokemon: Hashable {
-    let name: String
-    let pokedexNumber: Int
-    let pokemonTypes: [PokemonTypes]
+public struct Pokemon: Hashable, Codable {
+    public let name: String
+    public let pokedexNumber: Int
+    public let pokemonTypes: [PokemonTypes]
 
-    init(name: String, pokedexNumber: Int, pokemonTypes: [String]) {
+    public init(name: String, pokedexNumber: Int, pokemonTypes: [String]) {
         self.init(name: name, pokedexNumber: pokedexNumber, pokemonTypes: pokemonTypes.compactMap({ PokemonTypes(rawValue: $0) }))
     }
 
@@ -22,11 +22,11 @@ struct Pokemon: Hashable {
         self.pokemonTypes = pokemonTypes
     }
 
-    var imageURL: URL? {
+    public var imageURL: URL? {
         URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(pokedexNumber).png")
     }
 
-    var formattedPokedexNumber: String {
+    public var formattedPokedexNumber: String {
         "#\(String(pokedexNumber).leftPadding(toLength: 3, withPad: "0"))"
     }
 }

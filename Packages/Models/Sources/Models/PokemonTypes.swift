@@ -1,13 +1,13 @@
 //
-//  PokemonType.swift
-//  SwiftyDex
+//  PokemonTypes.swift
+//  
 //
-//  Created by Kamaal Farah on 13/06/2022.
+//  Created by Kamaal Farah on 14/06/2022.
 //
 
 import SwiftUI
 
-enum PokemonTypes: String, CaseIterable {
+public enum PokemonTypes: String, CaseIterable, Codable, Hashable {
     case normal
     case fire
     case water
@@ -27,11 +27,12 @@ enum PokemonTypes: String, CaseIterable {
     case steel
     case fairy
 
-    var name: String {
+    public var name: String {
         self.rawValue
     }
 
-    var colors: [Color] {
+    @available(macOS 10.15, iOS 13.0, *)
+    public var colors: [Color] {
         nameToColorHexesMap[self]?.compactMap({ Color(hex: $0) }) ?? []
     }
 }
@@ -57,6 +58,7 @@ private let nameToColorHexesMap: [PokemonTypes: [String]] = [
     .fairy: ["D685AD"]
 ]
 
+@available(macOS 10.15, iOS 13.0, *)
 extension Color {
     init?(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -89,3 +91,4 @@ extension Color {
         self.init(red: red, green: green, blue: blue, opacity: alpha)
     }
 }
+

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SalmonUI
+import Models
 
 struct PokedexItemView: View {
     let pokemon: Pokemon

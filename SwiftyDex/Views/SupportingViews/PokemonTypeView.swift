@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Models
 
 struct PokemonTypeView: View {
     let type: PokemonTypes
