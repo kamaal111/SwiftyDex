@@ -7,8 +7,10 @@
 
 import Vapor
 import PokeAPI
+import Models
 
 struct PokemonController: Controller {
+    
     func initializeRoutes(_ app: Application) {
     }
 

@@ -9,14 +9,16 @@ let package = Package(
     dependencies: [
         // 💧 A server-side Swift web framework.
         .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
-        .package(path: "../Packages/PokeAPI")
+        .package(path: "../Packages/PokeAPI"),
+        .package(path: "../Packages/Models")
     ],
     targets: [
         .target(
             name: "App",
             dependencies: [
                 .product(name: "Vapor", package: "vapor"),
-                "PokeAPI"
+                "PokeAPI",
+                "Models"
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of
