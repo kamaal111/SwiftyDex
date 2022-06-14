@@ -1,11 +1,11 @@
 import Vapor
 
-func routes(_ app: Application) throws {
-    app.get { req in
-        return "It works!"
-    }
+let controllers: [Controller] = [
+    RootController()
+]
 
-    app.get("hello") { req -> String in
-        return "Hello, world!"
+func routes(_ app: Application) throws {
+    for controller in controllers {
+        controller.initializeRoutes(app)
     }
 }
