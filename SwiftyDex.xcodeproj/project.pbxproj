@@ -31,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C2B0AB62858FF5B00D7E02F /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		2C30BA9128527D3C00553121 /* SwiftyDex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyDex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C30BA9428527D3C00553121 /* SwiftyDexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyDexApp.swift; sourceTree = "<group>"; };
 		2C30BA9628527D3C00553121 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 		2C9F03632854B45B00251D96 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				2C2B0AB62858FF5B00D7E02F /* Models */,
 				2C9F03642854B4CC00251D96 /* PokeAPI */,
 			);
 			path = Packages;

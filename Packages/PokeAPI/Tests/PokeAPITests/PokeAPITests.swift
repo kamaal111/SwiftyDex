@@ -8,8 +8,4 @@
 import XCTest
 @testable import PokeAPI
 
-final class PokeAPITests: XCTestCase {
-    func testExample() throws {
-        XCTAssert(true)
-    }
-}
+final class PokeAPITests: XCTestCase { }

@@ -13,10 +13,10 @@ struct RootResponse: Content {
 
 struct RootController: Controller {
     func initializeRoutes(_ app: Application) {
-        app.get(use: read(req:))
+        app.get(use: read(request:))
     }
 
-    private func read(req: Request) -> RootResponse {
+    private func read(request: Request) -> RootResponse {
         RootResponse(hello: "world")
     }
 }
