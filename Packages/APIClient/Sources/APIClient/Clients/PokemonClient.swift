@@ -13,17 +13,16 @@ import APIModels
 public struct PokemonClient: ClientKit {
     public let networker: XiphiasNet
 
+    private let baseURL = URL(string: "http://localhost:8080/pokemon")!
+
     init(networker: XiphiasNet) {
         self.networker = networker
     }
 
     public func getPokedex(by id: Int) async -> Result<[Pokemon], ClientKitErrors> {
-        await getRequest(from: .pokedex(id: id))
-    }
-}
-
-extension Endpoint {
-    fileprivate static func pokedex(id: Int) -> Self {
-        .init(path: "/pokedex/\(id)", queryItems: [])
+        let url = baseURL
+            .appendingPathExtension("pokedex")
+            .appendingPathExtension("\(id)")
+        return await getRequest(from: url)
     }
 }

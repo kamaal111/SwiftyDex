@@ -19,7 +19,9 @@ struct PokemonController: Controller {
     }
 
     func initializeRoutes(_ app: Application) {
-        app.get("pokedex", ":id", use: getPokedex)
+        app.group("pokemon") { pokemon in
+            pokemon.get("pokedex", ":id", use: getPokedex)
+        }
     }
 
     func getPokedex(request: Request) async throws -> [Pokemon] {

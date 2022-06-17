@@ -7,7 +7,6 @@
 
 import Foundation
 import XiphiasNet
-import os.log
 
 public protocol ClientKit {
     var networker: XiphiasNet { get }
@@ -35,33 +34,9 @@ public enum ClientKitErrors: Error, Equatable {
     }
 }
 
-public struct Endpoint {
-    public let path: String
-    public let queryItems: [URLQueryItem]
-
-    public init(path: String, queryItems: [URLQueryItem]) {
-        self.path = path
-        self.queryItems = queryItems
-    }
-
-    public var url: URL? {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "pokeapi.co"
-        components.path = "/api/v2\(path)"
-
-        if !queryItems.isEmpty {
-            components.queryItems = queryItems
-        }
-
-        return components.url
-    }
-}
-
-
 extension ClientKit {
-    public func getRequest<T: Decodable>(from endpoint: Endpoint) async -> Result<T, ClientKitErrors> {
-        await networker.getRequest(from: endpoint)
+    public func getRequest<T: Decodable>(from url: URL) async -> Result<T, ClientKitErrors> {
+        await networker.request(from: url)
             .map(\.data)
             .mapError(mapError)
     }
@@ -81,15 +56,5 @@ extension ClientKit {
         case let .invalidURL(url: url):
             return .invalidURL(url: url)
         }
-    }
-}
-
-extension XiphiasNet {
-    func getRequest<T: Decodable>(from endpoint: Endpoint) async -> Result<Response<T>, XiphiasNet.Errors> {
-        guard let url = endpoint.url else { return .failure(.invalidURL(url: endpoint.url?.absoluteString ?? "")) }
-        if #available(iOS 14.0, macOS 11.0, *) {
-            Logger(subsystem: "io.kamaal.PokeAPI", category: "networking").info("GET: \(url.absoluteString)")
-        }
-        return await request(from: url)
     }
 }

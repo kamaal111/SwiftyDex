@@ -13,27 +13,24 @@ import PokeAPIModels
 public struct PokedexClient: ClientKit {
     public let networker: XiphiasNet
 
+    private let baseURL = Constants.baseURL
+        .appendingPathExtension("pokedex")
+
     init(networker: XiphiasNet) {
         self.networker = networker
     }
 
     public func getPokedexEntries() async -> Result<PaginatedResponse<ResponseEntry>, ClientKitErrors> {
-        await getRequest(from: .pokedex)
+        await getRequest(from: baseURL)
     }
 
     public func getPokedex(by id: Int) async -> Result<PokedexResponse, ClientKitErrors> {
-        await getRequest(from: .pokedex(id: id))
+        let url = baseURL
+            .appendingPathExtension("\(id)")
+        return await getRequest(from: url)
     }
 
     public func getPokedex(by region: Regions) async -> Result<PokedexResponse, ClientKitErrors> {
         await getPokedex(by: region.id)
-    }
-}
-
-extension Endpoint {
-    fileprivate static let pokedex = Endpoint(path: "/pokedex", queryItems: [])
-
-    fileprivate static func pokedex(id: Int) -> Self {
-        .init(path: "/pokedex/\(id)", queryItems: [])
     }
 }
