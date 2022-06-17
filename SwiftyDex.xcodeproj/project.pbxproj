@@ -48,8 +48,8 @@
 		2C9F03732854C60B00251D96 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		2C9F03752854C6BC00251D96 /* DetailColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailColumn.swift; sourceTree = "<group>"; };
 		2C9F03782854CB7900251D96 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
+		2CA9B365285CF33A00975053 /* API */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = API; sourceTree = "<group>"; };
 		2CB7A5812857B50A001CD00E /* PokemonTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTypeView.swift; sourceTree = "<group>"; };
-		2CB7A5832857BE23001CD00E /* SimpleAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SimpleAPI; sourceTree = "<group>"; };
 		2CFC5265285641AD00180A98 /* PokedexItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexItemView.swift; sourceTree = "<group>"; };
 		2CFC54702854FED2006CDB11 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,7 +73,7 @@
 		2C30BA8828527D3C00553121 = {
 			isa = PBXGroup;
 			children = (
-				2CB7A5832857BE23001CD00E /* SimpleAPI */,
+				2CA9B365285CF33A00975053 /* API */,
 				2C9F03652854B81A00251D96 /* Frameworks */,
 				2C9F03632854B45B00251D96 /* Packages */,
 				2C30BA9228527D3C00553121 /* Products */,

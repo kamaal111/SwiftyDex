@@ -19,7 +19,7 @@ x-shared_environment: &shared_environment
   
 services:
   app:
-    image: simple-a-p-i:latest
+    image: a-p-i:latest
     build:
       context: .
     environment:
