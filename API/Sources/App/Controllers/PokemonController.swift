@@ -22,17 +22,29 @@ struct PokemonController: Controller {
         app.get("pokedex", ":id", use: getPokedex)
     }
 
-    func getPokedex(request: Request) async throws -> PokedexResponse {
+    func getPokedex(request: Request) async throws -> [Pokemon] {
         guard let id = request.parameters.get("id"), let id = Int(id) else { throw Abort(.badRequest) }
+
         let result = await pokeAPI.pokedex.getPokedex(by: id)
+        let pokedexResponse: PokedexResponse
         switch result {
         case .failure(let failure):
             logger.error("failed with \(failure)")
             throw Abort(.failedDependency, reason: "Poke API failed")
         case .success(let success):
-            return success
+            pokedexResponse = success
         }
+
+        return pokedexResponse.pokemonEntries
+            .compactMap({ Pokemon(fromEntry: $0) })
     }
 }
 
-extension PokedexResponse: Content { }
+extension Pokemon: Content { }
+
+extension Pokemon {
+    init?(fromEntry entry: PokedexResponse.PokemonEntry) {
+        guard let name = entry.pokemonSpecies.name else { return nil }
+        self.init(name: name, pokedexNumber: entry.entryNumber, pokemonTypes: [])
+    }
+}

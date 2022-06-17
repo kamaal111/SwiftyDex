@@ -10,17 +10,20 @@ import Foundation
 import os.log
 import APIModels
 import PokeAPIModels
+import APIClient
 
 final class PokemonModel: NSObject, ObservableObject {
     @Published private(set) var pokemons: [Pokemon] = []
 
     private let pokeAPI: PokeAPI
+    private let apiClient: APIClient
     private var gotInitialPokemonEntries = false
     private let preview: Bool
     private var pokemonDetailsFetched: [Int] = []
 
     init(preview: Bool = false) {
         self.pokeAPI = .init()
+        self.apiClient = .init()
         self.preview = preview
         logger.info("initializing \"\(PokemonModel.description())\" with (preview=\(preview))")
     }
@@ -30,9 +33,10 @@ final class PokemonModel: NSObject, ObservableObject {
 
         gotInitialPokemonEntries = true
 
-        let pokedexResponse: PokedexResponse
-        let pokedexResult = await pokeAPI.pokedex.getPokedex(by: .kanto, sample: preview)
-        switch pokedexResult {
+        
+        let pokedexResponse: [Pokemon]
+        let result = await apiClient.pokemon.getPokedex(by: 2)
+        switch result {
         case let .failure(failure):
             // TODO: HANDLE ERROR IN VIEW
             logger.error("error while getting initial pokemons; \(failure.localizedDescription)")
@@ -42,12 +46,7 @@ final class PokemonModel: NSObject, ObservableObject {
             pokedexResponse = success
         }
 
-        let pokemons = pokedexResponse.pokemonEntries
-            .map {
-                Pokemon(name: $0.pokemonSpecies.name ?? "", pokedexNumber: $0.entryNumber, pokemonTypes: [])
-            }
-
-        await setPokemons(pokemons)
+        await setPokemons(pokedexResponse)
     }
 
     func getPokemonDetails(of pokemon: Pokemon) async {
