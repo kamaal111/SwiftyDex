@@ -4,34 +4,29 @@
 import PackageDescription
 
 let package = Package(
-    name: "PokeAPI",
+    name: "APIClient",
     platforms: [
         .iOS(.v13),
         .macOS(.v10_15),
     ],
     products: [
         .library(
-            name: "PokeAPI",
-            targets: ["PokeAPI"]
-        ),
+            name: "APIClient",
+            targets: ["APIClient"]),
     ],
     dependencies: [
         .package(url: "https://github.com/kamaal111/XiphiasNet.git", "7.0.0" ..< "8.0.0"),
         .package(path: "../ClientKit"),
-        .package(path: "../APIModels"),
     ],
     targets: [
         .target(
-            name: "PokeAPI",
+            name: "APIClient",
             dependencies: [
                 "XiphiasNet",
                 "ClientKit",
-                "APIModels",
-            ]
-        ),
+            ]),
         .testTarget(
-            name: "PokeAPITests",
-            dependencies: ["PokeAPI"]
-        ),
+            name: "APIClientTests",
+            dependencies: ["APIClient"]),
     ]
 )

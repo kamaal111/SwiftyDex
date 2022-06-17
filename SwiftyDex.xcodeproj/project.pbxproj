@@ -50,6 +50,8 @@
 		2CA9B365285CF33A00975053 /* API */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = API; sourceTree = "<group>"; };
 		2CB7A5812857B50A001CD00E /* PokemonTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTypeView.swift; sourceTree = "<group>"; };
 		2CBB8DDC285CF56100505FAE /* APIModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = APIModels; sourceTree = "<group>"; };
+		2CBB8DDF285CF68600505FAE /* APIClient */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = APIClient; sourceTree = "<group>"; };
+		2CBB8DE0285CF73900505FAE /* ClientKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ClientKit; sourceTree = "<group>"; };
 		2CFC5265285641AD00180A98 /* PokedexItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexItemView.swift; sourceTree = "<group>"; };
 		2CFC54702854FED2006CDB11 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,7 +134,9 @@
 		2C9F03632854B45B00251D96 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				2CBB8DDF285CF68600505FAE /* APIClient */,
 				2CBB8DDC285CF56100505FAE /* APIModels */,
+				2CBB8DE0285CF73900505FAE /* ClientKit */,
 				2C9F03642854B4CC00251D96 /* PokeAPI */,
 			);
 			path = Packages;

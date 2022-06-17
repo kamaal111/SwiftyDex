@@ -7,26 +7,27 @@
 
 import Foundation
 import XiphiasNet
+import ClientKit
 
-public struct PokedexClient: Client {
-    let networker: XiphiasNet
+public struct PokedexClient: ClientKit {
+    public let networker: XiphiasNet
 
     init(networker: XiphiasNet) {
         self.networker = networker
     }
 
-    public func getPokedexEntries() async -> Result<PaginatedResponse<ResponseEntry>, ClientErrors> {
+    public func getPokedexEntries() async -> Result<PaginatedResponse<ResponseEntry>, ClientKitErrors> {
         await getRequest(from: .pokedex)
     }
 
-    public func getPokedex(by id: Int, sample: Bool = false) async -> Result<PokedexResponse, ClientErrors> {
+    public func getPokedex(by id: Int, sample: Bool = false) async -> Result<PokedexResponse, ClientKitErrors> {
         if sample {
             return .success(.sample)
         }
         return await getRequest(from: .pokedex(id: id))
     }
 
-    public func getPokedex(by region: Regions, sample: Bool = false) async -> Result<PokedexResponse, ClientErrors> {
+    public func getPokedex(by region: Regions, sample: Bool = false) async -> Result<PokedexResponse, ClientKitErrors> {
         await getPokedex(by: region.id, sample: sample)
     }
 }
