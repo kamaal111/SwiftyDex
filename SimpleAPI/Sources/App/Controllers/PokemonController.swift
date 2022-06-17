@@ -10,11 +10,28 @@ import PokeAPI
 import Models
 
 struct PokemonController: Controller {
-    
-    func initializeRoutes(_ app: Application) {
+    private let pokeAPI: PokeAPI
+    private let logger = Logger(label: "io.kamaal.api.pokemon_controler")
+
+    init(urlSession: URLSession = .shared) {
+        self.pokeAPI = PokeAPI(urlSession: urlSession)
     }
 
-    func getPokedex(request: Request) {
-        
+    func initializeRoutes(_ app: Application) {
+        app.get("pokedex", ":id", use: getPokedex)
+    }
+
+    func getPokedex(request: Request) async throws -> PokedexResponse {
+        guard let id = request.parameters.get("id"), let id = Int(id) else { throw Abort(.badRequest) }
+        let result = await pokeAPI.pokedex.getPokedex(by: id)
+        switch result {
+        case .failure(let failure):
+            logger.error("failed with \(failure)")
+            throw Abort(.failedDependency, reason: "Poke API failed")
+        case .success(let success):
+            return success
+        }
     }
 }
+
+extension PokedexResponse: Content { }
