@@ -29,20 +29,15 @@ struct PokemonController: Controller {
         guard let id = request.parameters.get("id"), let id = Int(id)
         else { throw Abort(.badRequest, reason: "Invalid ID provided") }
 
-        let result = await pokeAPI.pokedex.getPokedex(by: id)
-        let pokedexResponse: PokedexResponse
-        switch result {
-        case .failure(let failure):
-            throw returnClientErrorFromPokeAPI(failure)
-        case .success(let success):
-            pokedexResponse = success
-        }
+        let response = try await pokeAPI.pokedex.getPokedex(by: id)
+            .mapError(returnClientErrorFromPokeAPI)
+            .map({ $0.pokemonEntries.compactMap { Pokemon(fromEntry: $0) } })
+            .get()
 
-        return pokedexResponse.pokemonEntries
-            .compactMap({ Pokemon(fromEntry: $0) })
+        return response
     }
 
-    private func returnClientErrorFromPokeAPI(_ error: ClientKitErrors) -> AbortError {
+    private func returnClientErrorFromPokeAPI(_ error: ClientKitErrors) -> some AbortError {
         switch error {
         case .parsingError(error: let error):
             logger.error("failed parsing error in PokeAPI; \(error)")
