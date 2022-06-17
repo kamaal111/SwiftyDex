@@ -8,7 +8,7 @@
 import PokeAPI
 import Foundation
 import os.log
-import Models
+import APIModels
 
 final class PokemonModel: NSObject, ObservableObject {
     @Published private(set) var pokemons: [Pokemon] = []

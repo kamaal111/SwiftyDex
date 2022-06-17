@@ -8,7 +8,7 @@
 import SwiftUI
 import UrlImageView
 import ShrimpExtensions
-import Models
+import APIModels
 
 struct PokemonProfileImage: View {
     let pokemon: Pokemon

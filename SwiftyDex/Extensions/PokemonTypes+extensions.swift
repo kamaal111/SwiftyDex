@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Models
+import APIModels
 
 extension PokemonTypes {
     public var colors: [Color] {

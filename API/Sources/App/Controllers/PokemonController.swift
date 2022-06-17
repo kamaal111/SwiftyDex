@@ -7,7 +7,7 @@
 
 import Vapor
 import PokeAPI
-import Models
+import APIModels
 
 struct PokemonController: Controller {
     private let pokeAPI: PokeAPI

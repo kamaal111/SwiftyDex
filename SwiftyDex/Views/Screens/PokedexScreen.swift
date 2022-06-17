@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Models
+import APIModels
 
 struct PokedexScreen: View {
     @EnvironmentObject private var pokemonModel: PokemonModel
