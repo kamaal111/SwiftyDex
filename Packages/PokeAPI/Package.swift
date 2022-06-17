@@ -19,6 +19,7 @@ let package = Package(
         .package(url: "https://github.com/kamaal111/XiphiasNet.git", "7.0.0" ..< "8.0.0"),
         .package(path: "../ClientKit"),
         .package(path: "../APIModels"),
+        .package(path: "../PokeAPIModels"),
     ],
     targets: [
         .target(
@@ -27,6 +28,7 @@ let package = Package(
                 "XiphiasNet",
                 "ClientKit",
                 "APIModels",
+                "PokeAPIModels",
             ]
         ),
         .testTarget(

@@ -8,6 +8,7 @@
 import Foundation
 import XiphiasNet
 import ClientKit
+import PokeAPIModels
 
 public struct PokedexClient: ClientKit {
     public let networker: XiphiasNet

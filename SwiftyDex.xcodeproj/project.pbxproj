@@ -23,6 +23,7 @@
 		2C9F03792854CB7900251D96 /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F03782854CB7900251D96 /* PokemonModel.swift */; };
 		2CB7A5822857B50A001CD00E /* PokemonTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7A5812857B50A001CD00E /* PokemonTypeView.swift */; };
 		2CBB8DDE285CF5EB00505FAE /* APIModels in Frameworks */ = {isa = PBXBuildFile; productRef = 2CBB8DDD285CF5EB00505FAE /* APIModels */; };
+		2CBB8DE3285CFE3E00505FAE /* PokeAPIModels in Frameworks */ = {isa = PBXBuildFile; productRef = 2CBB8DE2285CFE3E00505FAE /* PokeAPIModels */; };
 		2CEA34E228550F060011B9B9 /* UrlImageView in Frameworks */ = {isa = PBXBuildFile; productRef = 2CEA34E128550F060011B9B9 /* UrlImageView */; };
 		2CEA34E528550FF40011B9B9 /* ShrimpExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2CEA34E428550FF40011B9B9 /* ShrimpExtensions */; };
 		2CEA34EB28551B850011B9B9 /* SalmonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2CEA34EA28551B850011B9B9 /* SalmonUI */; };
@@ -52,6 +53,7 @@
 		2CBB8DDC285CF56100505FAE /* APIModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = APIModels; sourceTree = "<group>"; };
 		2CBB8DDF285CF68600505FAE /* APIClient */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = APIClient; sourceTree = "<group>"; };
 		2CBB8DE0285CF73900505FAE /* ClientKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ClientKit; sourceTree = "<group>"; };
+		2CBB8DE1285CFC9200505FAE /* PokeAPIModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PokeAPIModels; sourceTree = "<group>"; };
 		2CFC5265285641AD00180A98 /* PokedexItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexItemView.swift; sourceTree = "<group>"; };
 		2CFC54702854FED2006CDB11 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CBB8DE3285CFE3E00505FAE /* PokeAPIModels in Frameworks */,
 				2CEA34EB28551B850011B9B9 /* SalmonUI in Frameworks */,
 				2CBB8DDE285CF5EB00505FAE /* APIModels in Frameworks */,
 				2C9F03672854B81A00251D96 /* PokeAPI in Frameworks */,
@@ -138,6 +141,7 @@
 				2CBB8DDC285CF56100505FAE /* APIModels */,
 				2CBB8DE0285CF73900505FAE /* ClientKit */,
 				2C9F03642854B4CC00251D96 /* PokeAPI */,
+				2CBB8DE1285CFC9200505FAE /* PokeAPIModels */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -252,6 +256,7 @@
 				2CEA34E428550FF40011B9B9 /* ShrimpExtensions */,
 				2CEA34EA28551B850011B9B9 /* SalmonUI */,
 				2CBB8DDD285CF5EB00505FAE /* APIModels */,
+				2CBB8DE2285CFE3E00505FAE /* PokeAPIModels */,
 			);
 			productName = SwiftyDex;
 			productReference = 2C30BA9128527D3C00553121 /* SwiftyDex.app */;
@@ -585,6 +590,10 @@
 		2CBB8DDD285CF5EB00505FAE /* APIModels */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = APIModels;
+		};
+		2CBB8DE2285CFE3E00505FAE /* PokeAPIModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PokeAPIModels;
 		};
 		2CEA34E128550F060011B9B9 /* UrlImageView */ = {
 			isa = XCSwiftPackageProductDependency;

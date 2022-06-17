@@ -66,7 +66,7 @@ public struct PokedexResponse: Codable, Hashable, Identifiable {
 
 #if DEBUG
 extension PokedexResponse {
-    static let sample = try! JSONDecoder().decode(Self.self, from: pokedexResponseSample)
+    public static let sample = try! JSONDecoder().decode(Self.self, from: pokedexResponseSample)
 }
 
 private let pokedexResponseSample = """

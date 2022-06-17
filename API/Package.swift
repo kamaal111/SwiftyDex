@@ -11,6 +11,7 @@ let package = Package(
         .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
         .package(path: "../Packages/PokeAPI"),
         .package(path: "../Packages/APIModels"),
+        .package(path: "../Packages/PokeAPIModels"),
     ],
     targets: [
         .target(
@@ -19,6 +20,7 @@ let package = Package(
                 .product(name: "Vapor", package: "vapor"),
                 "PokeAPI",
                 "APIModels",
+                "PokeAPIModels",
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of
