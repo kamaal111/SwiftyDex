@@ -14,7 +14,7 @@ public struct PokedexClient: ClientKit {
     public let networker: XiphiasNet
 
     private let baseURL = Constants.baseURL
-        .appendingPathExtension("pokedex")
+        .appendingPathComponent("pokedex")
 
     init(networker: XiphiasNet) {
         self.networker = networker
@@ -26,7 +26,7 @@ public struct PokedexClient: ClientKit {
 
     public func getPokedex(by id: Int) async -> Result<PokedexResponse, ClientKitErrors> {
         let url = baseURL
-            .appendingPathExtension("\(id)")
+            .appendingPathComponent("\(id)")
         return await getRequest(from: url)
     }
 

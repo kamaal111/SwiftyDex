@@ -13,10 +13,14 @@ import PokeAPIModels
 
 struct PokemonController: Controller {
     private let pokeAPI: PokeAPI
-    private let logger = Logger(label: "io.kamaal.api.pokemon_controler")
+    private let cacheHelper: CacheHelper
+    private let logger: Logger
 
-    init(urlSession: URLSession = .shared) {
+    init(urlSession: URLSession = .shared, fileManager: FileManager = .default) {
         self.pokeAPI = PokeAPI(urlSession: urlSession)
+        let logger = Logger(label: "io.kamaal.api.pokemon_controler")
+        self.cacheHelper = .init(fileManager: fileManager, logger: logger)
+        self.logger = logger
     }
 
     func initializeRoutes(_ app: Application) {
@@ -29,18 +33,29 @@ struct PokemonController: Controller {
         guard let id = request.parameters.get("id"), let id = Int(id)
         else { throw Abort(.badRequest, reason: "Invalid ID provided") }
 
+        let cacheURL = URL(fileURLWithPath: #file)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("Resources")
+            .appendingPathComponent("Pokedexes")
+            .appendingPathComponent("\(id)")
+            .appendingPathExtension("json")
+
+        if cacheHelper.exists(cacheURL) {
+            return try cacheHelper.get(from: cacheURL).get()
+        }
+
         let response = try await pokeAPI.pokedex.getPokedex(by: id)
             .mapError(returnClientErrorFromPokeAPI)
             .map { $0.pokemonEntries.compactMap { Pokemon(fromEntry: $0) } }
             .get()
 
-        let url = URL(string: #file)
-        print("url", url as Any)
+        try? cacheHelper.set(cacheURL, data: response).get()
 
         return response
     }
 
-    private func returnClientErrorFromPokeAPI(_ error: ClientKitErrors) -> some AbortError {
+    private func returnClientErrorFromPokeAPI(_ error: ClientKitErrors) -> Abort {
         switch error {
         case let .parsingError(error: error):
             logger.error("failed parsing error in PokeAPI; \(error)")

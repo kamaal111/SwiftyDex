@@ -21,8 +21,8 @@ public struct PokemonClient: ClientKit {
 
     public func getPokedex(by id: Int) async -> Result<[Pokemon], ClientKitErrors> {
         let url = baseURL
-            .appendingPathExtension("pokedex")
-            .appendingPathExtension("\(id)")
+            .appendingPathComponent("pokedex")
+            .appendingPathComponent("\(id)")
         return await getRequest(from: url)
     }
 }
