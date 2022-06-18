@@ -1,6 +1,6 @@
 //
 //  PokemonTypes.swift
-//  
+//
 //
 //  Created by Kamaal Farah on 14/06/2022.
 //
@@ -26,9 +26,9 @@ public enum PokemonTypes: String, CaseIterable, Codable, Hashable {
     case dark
     case steel
     case fairy
-    
+
     public var name: String {
-        self.rawValue
+        rawValue
     }
 
     public var colorHex: [String]? {
@@ -54,5 +54,5 @@ private let nameToColorHexesMap: [PokemonTypes: [String]] = [
     .dragon: ["6F35FC"],
     .dark: ["705746"],
     .steel: ["B7B7CE"],
-    .fairy: ["D685AD"]
+    .fairy: ["D685AD"],
 ]

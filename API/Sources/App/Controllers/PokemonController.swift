@@ -1,6 +1,6 @@
 //
 //  PokemonController.swift
-//  
+//
 //
 //  Created by Kamaal Farah on 14/06/2022.
 //
@@ -8,8 +8,8 @@
 import Vapor
 import PokeAPI
 import APIModels
-import PokeAPIModels
 import ClientKit
+import PokeAPIModels
 
 struct PokemonController: Controller {
     private let pokeAPI: PokeAPI
@@ -31,26 +31,29 @@ struct PokemonController: Controller {
 
         let response = try await pokeAPI.pokedex.getPokedex(by: id)
             .mapError(returnClientErrorFromPokeAPI)
-            .map({ $0.pokemonEntries.compactMap { Pokemon(fromEntry: $0) } })
+            .map { $0.pokemonEntries.compactMap { Pokemon(fromEntry: $0) } }
             .get()
+
+        let url = URL(string: #file)
+        print("url", url as Any)
 
         return response
     }
 
     private func returnClientErrorFromPokeAPI(_ error: ClientKitErrors) -> some AbortError {
         switch error {
-        case .parsingError(error: let error):
+        case let .parsingError(error: error):
             logger.error("failed parsing error in PokeAPI; \(error)")
             return Abort(.internalServerError, reason: "Something went wrong")
-        case .invalidURL(url: let url):
+        case let .invalidURL(url: url):
             logger.error("unknown url in PokeAPI \(url)")
             return Abort(.internalServerError, reason: "Something went wrong")
         case .notAValidJSON:
             return Abort(.internalServerError, reason: "Something went wrong")
-        case .generalError(error: let error):
+        case let .generalError(error: error):
             logger.error("failed error in PokeAPI; \(error)")
             return Abort(.internalServerError, reason: "Something went wrong")
-        case .responseError(message: let message, code: let code):
+        case let .responseError(message: message, code: code):
             logger.error("response failure in PokeAPI; \(message)")
             if code >= 500 {
                 return Abort(.failedDependency, reason: "Poke API failed")

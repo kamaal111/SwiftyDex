@@ -41,12 +41,13 @@ struct PokedexScreen: View {
         .onAppear(perform: handleOnAppear)
         .onChange(of: pokemonModel.pokemons, perform: { _ in
             guard let selectedPokemon = viewModel.selectedPokemon,
-                    let editedPokemon = pokemonModel.pokemons.first(where: { $0.pokedexNumber == selectedPokemon.pokedexNumber }) else { return }
+                  let editedPokemon = pokemonModel.pokemons
+                  .first(where: { $0.pokedexNumber == selectedPokemon.pokedexNumber }) else { return }
 
             viewModel.setSelectedPokemon(editedPokemon)
         })
         #if os(iOS)
-            .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.large)
         #endif
     }
 

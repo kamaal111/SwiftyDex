@@ -5,9 +5,9 @@
 //  Created by Kamaal Farah on 11/06/2022.
 //
 
+import ClientKit
 import Foundation
 import XiphiasNet
-import ClientKit
 import PokeAPIModels
 
 public struct PokedexClient: ClientKit {

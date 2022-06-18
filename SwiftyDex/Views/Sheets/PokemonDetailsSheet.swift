@@ -42,6 +42,7 @@ struct PokemonDetailsSheet: View {
 
 struct PokemonDetailsSheet_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonDetailsSheet(selectedPokemon: .init(name: "charizard", pokedexNumber: 6, pokemonTypes: ["fire", "flying"]))
+        PokemonDetailsSheet(selectedPokemon: .init(name: "charizard", pokedexNumber: 6,
+                                                   pokemonTypes: ["fire", "flying"]))
     }
 }

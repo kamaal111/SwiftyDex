@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
+import APIModels
 import UrlImageView
 import ShrimpExtensions
-import APIModels
 
 struct PokemonProfileImage: View {
     let pokemon: Pokemon
@@ -23,7 +23,8 @@ struct PokemonProfileImage: View {
 
     var body: some View {
         UrlImageView(imageUrl: pokemon.imageURL, imageSize: .squared(size - (size / 15)))
-            .overlay(RoundedRectangle(cornerRadius: size / 30).stroke(withBorder ? Color.accentColor : .clear, lineWidth: 2))
+            .overlay(RoundedRectangle(cornerRadius: size / 30)
+                .stroke(withBorder ? Color.accentColor : .clear, lineWidth: 2))
             .padding(.all, size / 15)
             .overlay(RoundedRectangle(cornerRadius: size / 15).stroke(withBorder ? .black : .clear, lineWidth: 1))
     }
@@ -34,8 +35,15 @@ struct PokemonProfileImage: View {
 struct PokemonProfileImage_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            PokemonProfileImage(pokemon: .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]), size: 60)
-            PokemonProfileImage(pokemon: .init(name: "blastoise", pokedexNumber: 9, pokemonTypes: ["water"]), size: 260, withBorder: false)
+            PokemonProfileImage(
+                pokemon: .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]),
+                size: 60
+            )
+            PokemonProfileImage(
+                pokemon: .init(name: "blastoise", pokedexNumber: 9, pokemonTypes: ["water"]),
+                size: 260,
+                withBorder: false
+            )
         }
     }
 }

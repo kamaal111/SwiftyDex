@@ -8,15 +8,18 @@ let package = Package(
     products: [
         .library(
             name: "PokeAPIModels",
-            targets: ["PokeAPIModels"]),
+            targets: ["PokeAPIModels"]
+        ),
     ],
     dependencies: [],
     targets: [
         .target(
             name: "PokeAPIModels",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "PokeAPIModelsTests",
-            dependencies: ["PokeAPIModels"]),
+            dependencies: ["PokeAPIModels"]
+        ),
     ]
 )

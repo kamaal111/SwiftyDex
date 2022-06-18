@@ -43,7 +43,7 @@ extension ClientKit {
 }
 
 extension ClientKit {
-    fileprivate func mapError(_ error: XiphiasNet.Errors) -> ClientKitErrors {
+    private func mapError(_ error: XiphiasNet.Errors) -> ClientKitErrors {
         switch error {
         case let .generalError(error: error):
             return .generalError(error: error)

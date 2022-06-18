@@ -9,7 +9,7 @@ import Vapor
 
 let controllers: [Controller] = [
     RootController(),
-    PokemonController()
+    PokemonController(),
 ]
 
 func routes(_ app: Application) throws {

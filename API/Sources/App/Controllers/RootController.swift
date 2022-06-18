@@ -1,6 +1,6 @@
 //
 //  RootController.swift
-//  
+//
 //
 //  Created by Kamaal Farah on 14/06/2022.
 //
@@ -16,7 +16,7 @@ struct RootController: Controller {
         app.get(use: read(request:))
     }
 
-    private func read(request: Request) -> RootResponse {
+    private func read(request _: Request) -> RootResponse {
         RootResponse(hello: "world")
     }
 }

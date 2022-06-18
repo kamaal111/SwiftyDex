@@ -13,7 +13,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "ClientKit",
-            targets: ["ClientKit"]),
+            targets: ["ClientKit"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/kamaal111/XiphiasNet.git", "7.0.0" ..< "8.0.0"),
@@ -25,9 +26,11 @@ let package = Package(
             name: "ClientKit",
             dependencies: [
                 "XiphiasNet",
-            ]),
+            ]
+        ),
         .testTarget(
             name: "ClientKitTests",
-            dependencies: ["ClientKit"]),
+            dependencies: ["ClientKit"]
+        ),
     ]
 )

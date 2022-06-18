@@ -1,6 +1,6 @@
 //
 //  Pokemon.swift
-//  
+//
 //
 //  Created by Kamaal Farah on 14/06/2022.
 //
@@ -13,7 +13,11 @@ public struct Pokemon: Hashable, Codable {
     public let pokemonTypes: [PokemonTypes]
 
     public init(name: String, pokedexNumber: Int, pokemonTypes: [String]) {
-        self.init(name: name, pokedexNumber: pokedexNumber, pokemonTypes: pokemonTypes.compactMap({ PokemonTypes(rawValue: $0) }))
+        self.init(
+            name: name,
+            pokedexNumber: pokedexNumber,
+            pokemonTypes: pokemonTypes.compactMap { PokemonTypes(rawValue: $0) }
+        )
     }
 
     private init(name: String, pokedexNumber: Int, pokemonTypes: [PokemonTypes]) {

@@ -12,7 +12,8 @@ let package = Package(
     products: [
         .library(
             name: "APIClient",
-            targets: ["APIClient"]),
+            targets: ["APIClient"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/kamaal111/XiphiasNet.git", "7.0.0" ..< "8.0.0"),
@@ -24,9 +25,11 @@ let package = Package(
             dependencies: [
                 "XiphiasNet",
                 "ClientKit",
-            ]),
+            ]
+        ),
         .testTarget(
             name: "APIClientTests",
-            dependencies: ["APIClient"]),
+            dependencies: ["APIClient"]
+        ),
     ]
 )

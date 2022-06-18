@@ -5,10 +5,10 @@
 //  Created by Kamaal Farah on 11/06/2022.
 //
 
-import PokeAPI
-import Foundation
 import os.log
+import PokeAPI
 import APIModels
+import Foundation
 import PokeAPIModels
 import APIClient
 
@@ -33,7 +33,6 @@ final class PokemonModel: NSObject, ObservableObject {
 
         gotInitialPokemonEntries = true
 
-        
         let pokedexResponse: [Pokemon]
         let result = await apiClient.pokemon.getPokedex(by: 2)
         switch result {
@@ -56,14 +55,14 @@ final class PokemonModel: NSObject, ObservableObject {
         let response: PokemonDetails
         let result = await pokeAPI.pokemon.getPokemonDetails(by: pokemon.pokedexNumber)
         switch result {
-        case .failure(let failure):
+        case let .failure(failure):
             // TODO: HANDLE ERROR IN VIEW
             #if DEBUG
             print("failure", failure)
             #endif
             logger.error("error while getting pokemon details; \(failure.localizedDescription)")
             return
-        case .success(let success):
+        case let .success(success):
             response = success
         }
 
@@ -72,7 +71,11 @@ final class PokemonModel: NSObject, ObservableObject {
         let pokemonTypes = response.types
             .sorted(by: { $0.slot < $1.slot })
             .compactMap(\.type.name)
-        let pokemonWithTypes = Pokemon(name: pokemon.name, pokedexNumber: pokemon.pokedexNumber, pokemonTypes: pokemonTypes)
+        let pokemonWithTypes = Pokemon(
+            name: pokemon.name,
+            pokedexNumber: pokemon.pokedexNumber,
+            pokemonTypes: pokemonTypes
+        )
 
         await replacePokemon(at: index, with: pokemonWithTypes)
     }

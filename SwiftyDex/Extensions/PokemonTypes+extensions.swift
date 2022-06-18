@@ -10,7 +10,7 @@ import APIModels
 
 extension PokemonTypes {
     public var colors: [Color] {
-        self.colorHex?.compactMap({ Color(hex: $0) }) ?? []
+        colorHex?.compactMap { Color(hex: $0) } ?? []
     }
 }
 
@@ -35,10 +35,10 @@ extension Color {
             green = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
             blue = CGFloat(rgb & 0x0000FF) / 255.0
         } else if length == 8 {
-            red = CGFloat((rgb & 0xFF000000) >> 24) / 255.0
-            green = CGFloat((rgb & 0x00FF0000) >> 16) / 255.0
-            blue = CGFloat((rgb & 0x0000FF00) >> 8) / 255.0
-            alpha = CGFloat(rgb & 0x000000FF) / 255.0
+            red = CGFloat((rgb & 0xFF00_0000) >> 24) / 255.0
+            green = CGFloat((rgb & 0x00FF_0000) >> 16) / 255.0
+            blue = CGFloat((rgb & 0x0000_FF00) >> 8) / 255.0
+            alpha = CGFloat(rgb & 0x0000_00FF) / 255.0
         } else {
             return nil
         }

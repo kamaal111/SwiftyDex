@@ -116,7 +116,15 @@ public struct PokemonDetails: Codable, Hashable, Identifiable {
         public let frontFemale: URL?
         public let other: [String: [String: URL?]]
 
-        public init(backDefault: URL, backFemale: URL?, backShiny: URL, backShinyFemale: URL?, frontDefault: URL, frontFemale: URL?, other: [String : [String : URL?]]) {
+        public init(
+            backDefault: URL,
+            backFemale: URL?,
+            backShiny: URL,
+            backShinyFemale: URL?,
+            frontDefault: URL,
+            frontFemale: URL?,
+            other: [String: [String: URL?]]
+        ) {
             self.backDefault = backDefault
             self.backFemale = backFemale
             self.backShiny = backShiny

@@ -6,13 +6,9 @@
 //
 
 import Vapor
-import Fluent
-import FluentSQLiteDriver
 
 // configures your application
 public func configure(_ app: Application) throws {
-    app.databases.use(.sqlite(.file("api.sqlite")), as: .sqlite)
-
     // register routes
     try routes(app)
 }
