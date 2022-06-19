@@ -7,8 +7,9 @@
 
 import os.log
 import APIModels
-import Foundation
 import APIClient
+import Foundation
+import ShrimpExtensions
 
 final class PokemonModel: NSObject, ObservableObject {
     @Published private(set) var pokemons: [Pokemon] = []
@@ -47,7 +48,7 @@ final class PokemonModel: NSObject, ObservableObject {
 
     func getPokemonDetails(of pokemon: Pokemon) async {
         guard !pokemonDetailsFetched.contains(pokemon.pokedexNumber),
-              let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) else { return }
+              let index = pokemons.findIndex(by: \.name, is: pokemon.name) else { return }
 
         let response: Pokemon
         let result = await apiClient.pokemon.getPokemonDetails(by: pokemon.pokedexNumber)

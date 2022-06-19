@@ -19,12 +19,7 @@ struct PokedexScreen: View {
                 LazyVStack {
                     ForEach(pokemonModel.pokemons, id: \.self) { pokemon in
                         VStack {
-                            PokedexItemView(pokemon: pokemon, action: { _ in
-                                Task {
-                                    await viewModel.pokedexItemAction(pokemon)
-                                    await pokemonModel.getPokemonDetails(of: pokemon)
-                                }
-                            })
+                            PokedexItemView(pokemon: pokemon, action: { _ in onPokemonTap(pokemon) })
                             Divider()
                         }
                     }
@@ -41,16 +36,25 @@ struct PokedexScreen: View {
         })
         .navigationTitle(Text("Kanto Pokedex"))
         .onAppear(perform: handleOnAppear)
-        .onChange(of: pokemonModel.pokemons, perform: { _ in
-            guard let selectedPokemon = viewModel.selectedPokemon,
-                  let editedPokemon = pokemonModel.pokemons
-                  .first(where: { $0.pokedexNumber == selectedPokemon.pokedexNumber }) else { return }
-
-            viewModel.setSelectedPokemon(editedPokemon)
-        })
+        .onChange(of: pokemonModel.pokemons, perform: onPokemonsChange)
         #if os(iOS)
-        .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.large)
         #endif
+    }
+
+    private func onPokemonTap(_ pokemon: Pokemon) {
+        Task {
+            await viewModel.pokedexItemAction(pokemon)
+            await pokemonModel.getPokemonDetails(of: pokemon)
+        }
+    }
+
+    private func onPokemonsChange(_: [Pokemon]) {
+        guard let selectedPokemon = viewModel.selectedPokemon else { return }
+        guard let editedPokemonIndex = pokemonModel.pokemons
+            .binarySearch(by: \.pokedexNumber, is: selectedPokemon.pokedexNumber) else { return }
+
+        viewModel.setSelectedPokemon(pokemonModel.pokemons[editedPokemonIndex])
     }
 
     private func handleOnAppear() {
