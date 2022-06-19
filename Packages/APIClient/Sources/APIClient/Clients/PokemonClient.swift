@@ -19,6 +19,17 @@ public struct PokemonClient: ClientKit {
         self.networker = networker
     }
 
+    public func getPokemonDetails(by name: String) async -> Result<Pokemon, ClientKitErrors> {
+        let url = baseURL
+            .appendingPathComponent("details")
+            .appendingPathComponent("\(name)")
+        return await getRequest(from: url)
+    }
+
+    public func getPokemonDetails(by id: Int) async -> Result<Pokemon, ClientKitErrors> {
+        await getPokemonDetails(by: "\(id)")
+    }
+
     public func getPokedex(by id: Int) async -> Result<[Pokemon], ClientKitErrors> {
         let url = baseURL
             .appendingPathComponent("pokedex")

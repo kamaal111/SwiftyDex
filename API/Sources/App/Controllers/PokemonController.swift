@@ -26,6 +26,24 @@ struct PokemonController: Controller {
     func initializeRoutes(_ app: Application) {
         app.group("pokemon") { pokemon in
             pokemon.get("pokedex", ":id", use: getPokedex)
+            pokemon.get("details", ":idOrName", use: getPokemonDetails)
+        }
+    }
+
+    func getPokemonDetails(request: Request) async throws -> Pokemon {
+        guard let idOrName = request.parameters.get("idOrName")
+        else { throw Abort(.badRequest, reason: "Invalid ID or name provided") }
+
+        return try await cacheHelper.withCache(withKey: "pokemon_\(idOrName)") {
+            try await pokeAPI.pokemon.getPokemonDetails(by: idOrName)
+                .mapError(returnClientErrorFromPokeAPI(_:))
+                .map {
+                    let pokemonTypes = $0.types
+                        .sorted(by: { $0.slot < $1.slot })
+                        .compactMap(\.type.name)
+                    return Pokemon(name: $0.name, pokedexNumber: $0.id, pokemonTypes: pokemonTypes)
+                }
+                .get()
         }
     }
 
@@ -33,12 +51,12 @@ struct PokemonController: Controller {
         guard let id = request.parameters.get("id"), let id = Int(id)
         else { throw Abort(.badRequest, reason: "Invalid ID provided") }
 
-        return try await cacheHelper.withCache(withKey: "pokedex\(id)", {
+        return try await cacheHelper.withCache(withKey: "pokedex_\(id)") {
             try await pokeAPI.pokedex.getPokedex(by: id)
-                .mapError(returnClientErrorFromPokeAPI)
+                .mapError(returnClientErrorFromPokeAPI(_:))
                 .map { $0.pokemonEntries.compactMap { Pokemon(fromEntry: $0) } }
                 .get()
-        })
+        }
     }
 
     private func returnClientErrorFromPokeAPI(_ error: ClientKitErrors) -> Abort {

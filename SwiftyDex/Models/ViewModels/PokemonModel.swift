@@ -52,8 +52,8 @@ final class PokemonModel: NSObject, ObservableObject {
         guard !pokemonDetailsFetched.contains(pokemon.pokedexNumber),
               let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) else { return }
 
-        let response: PokemonDetails
-        let result = await pokeAPI.pokemon.getPokemonDetails(by: pokemon.pokedexNumber)
+        let response: Pokemon
+        let result = await apiClient.pokemon.getPokemonDetails(by: pokemon.pokedexNumber)
         switch result {
         case let .failure(failure):
             // TODO: HANDLE ERROR IN VIEW
@@ -68,16 +68,7 @@ final class PokemonModel: NSObject, ObservableObject {
 
         pokemonDetailsFetched.append(pokemon.pokedexNumber)
 
-        let pokemonTypes = response.types
-            .sorted(by: { $0.slot < $1.slot })
-            .compactMap(\.type.name)
-        let pokemonWithTypes = Pokemon(
-            name: pokemon.name,
-            pokedexNumber: pokemon.pokedexNumber,
-            pokemonTypes: pokemonTypes
-        )
-
-        await replacePokemon(at: index, with: pokemonWithTypes)
+        await replacePokemon(at: index, with: response)
     }
 
     @MainActor
