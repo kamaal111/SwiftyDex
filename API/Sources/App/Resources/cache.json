@@ -183,5 +183,20 @@
 	eyJuYW1lIjoiaXZ5c2F1ciIsInBva2VkZXhOdW1iZXIiOjIsInBva2Vtb25UeXBlcyI6
 	WyJncmFzcyIsInBvaXNvbiJdfQ==
 	</data>
+	<key>pokemon_3</key>
+	<data>
+	eyJuYW1lIjoidmVudXNhdXIiLCJwb2tlZGV4TnVtYmVyIjozLCJwb2tlbW9uVHlwZXMi
+	OlsiZ3Jhc3MiLCJwb2lzb24iXX0=
+	</data>
+	<key>pokemon_5</key>
+	<data>
+	eyJuYW1lIjoiY2hhcm1lbGVvbiIsInBva2VkZXhOdW1iZXIiOjUsInBva2Vtb25UeXBl
+	cyI6WyJmaXJlIl19
+	</data>
+	<key>pokemon_6</key>
+	<data>
+	eyJuYW1lIjoiY2hhcml6YXJkIiwicG9rZWRleE51bWJlciI6NiwicG9rZW1vblR5cGVz
+	IjpbImZpcmUiLCJmbHlpbmciXX0=
+	</data>
 </dict>
 </plist>

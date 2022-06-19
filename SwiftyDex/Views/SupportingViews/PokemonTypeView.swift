@@ -12,26 +12,22 @@ struct PokemonTypeView: View {
     let type: PokemonTypes
 
     var body: some View {
-        Text(type.name.uppercased())
+        Text(type.name.capitalized)
             .bold()
-            .foregroundColor(.white)
-            .padding(.horizontal, .small)
-            .padding(.vertical, .extraSmall)
-            .background(backgroundColor)
-            .cornerRadius(.extraExtraSmall)
+            .foregroundColor(color)
+            .padding(.horizontal, .medium)
+            .padding(.vertical, .small)
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(color, lineWidth: 2))
     }
 
-    private var backgroundColor: some View {
-        VStack(spacing: 0) {
-            ForEach(type.colors, id: \.self) { color in
-                color
-            }
-        }
+    private var color: Color {
+        type.colors.first!
     }
 }
 
 struct PokemonTypeView_Previews: PreviewProvider {
     static var previews: some View {
         PokemonTypeView(type: .flying)
+            .padding(.all, .medium)
     }
 }
