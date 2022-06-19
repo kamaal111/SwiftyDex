@@ -10,7 +10,9 @@ import SalmonUI
 import APIModels
 
 struct PokemonDetailsSheet: View {
-    @Environment(\.device) var device
+    @Environment(\.device) private var device
+
+    @State private var frameSize: CGSize = .zero
 
     let selectedPokemon: Pokemon?
     let close: () -> Void
@@ -28,34 +30,38 @@ struct PokemonDetailsSheet: View {
                 mainView
             }
         }
+        .kBindToFrameSize($frameSize)
     }
 
     private var mainView: some View {
         ZStack {
             if let selectedPokemon {
-                GeometryReader(content: { proxy in
-                    VStack {
-                        HStack(spacing: 2) {
-                            Text(selectedPokemon.formattedPokedexNumber)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .bold()
-                            Text(selectedPokemon.name.capitalized)
-                                .font(.headline)
-                        }
-                        PokemonProfileImage(pokemon: selectedPokemon, size: proxy.size.width / 1.5, withBorder: false)
-                        HStack {
-                            ForEach(selectedPokemon.pokemonTypes, id: \.self) { type in
-                                PokemonTypeView(type: type)
-                            }
+                VStack {
+                    HStack(spacing: 2) {
+                        Text(selectedPokemon.formattedPokedexNumber)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .bold()
+                        Text(selectedPokemon.name.capitalized)
+                            .font(.headline)
+                    }
+                    PokemonProfileImage(pokemon: selectedPokemon, size: profileImageSize, withBorder: false)
+                    HStack {
+                        ForEach(selectedPokemon.pokemonTypes, id: \.self) { type in
+                            PokemonTypeView(type: type)
                         }
                     }
-                    .ktakeWidthEagerly()
-                })
-                .padding(.horizontal, .medium)
-                .padding(.bottom, .medium)
+                }
             }
         }
+        .ktakeSizeEagerly()
+    }
+
+    private var profileImageSize: CGFloat {
+        if frameSize.width > frameSize.height {
+            return frameSize.height / 3
+        }
+        return frameSize.width / 3
     }
 }
 
