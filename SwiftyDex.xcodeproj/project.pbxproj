@@ -571,8 +571,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kamaal111/UrlImageView.git";
 			requirement = {
-				kind = revision;
-				revision = 510698c341959ba9bfecabf14e874e8a489d8891;
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
 			};
 		};
 		2CEA34E328550FF40011B9B9 /* XCRemoteSwiftPackageReference "ShrimpExtensions" */ = {
