@@ -33,26 +33,12 @@ struct PokemonController: Controller {
         guard let id = request.parameters.get("id"), let id = Int(id)
         else { throw Abort(.badRequest, reason: "Invalid ID provided") }
 
-        let cacheURL = URL(fileURLWithPath: #file)
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-            .appendingPathComponent("Resources")
-            .appendingPathComponent("Pokedexes")
-            .appendingPathComponent("\(id)")
-            .appendingPathExtension("json")
-
-        if cacheHelper.exists(cacheURL) {
-            return try cacheHelper.get(from: cacheURL).get()
-        }
-
-        let response = try await pokeAPI.pokedex.getPokedex(by: id)
-            .mapError(returnClientErrorFromPokeAPI)
-            .map { $0.pokemonEntries.compactMap { Pokemon(fromEntry: $0) } }
-            .get()
-
-        try? cacheHelper.set(cacheURL, data: response).get()
-
-        return response
+        return try await cacheHelper.withCache(withKey: "pokedex\(id)", {
+            try await pokeAPI.pokedex.getPokedex(by: id)
+                .mapError(returnClientErrorFromPokeAPI)
+                .map { $0.pokemonEntries.compactMap { Pokemon(fromEntry: $0) } }
+                .get()
+        })
     }
 
     private func returnClientErrorFromPokeAPI(_ error: ClientKitErrors) -> Abort {

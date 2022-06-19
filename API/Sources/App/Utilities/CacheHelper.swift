@@ -1,12 +1,12 @@
 //
 //  CacheHelper.swift
-//  
+//
 //
 //  Created by Kamaal M Farah on 18/06/2022.
 //
 
-import Foundation
 import Vapor
+import Foundation
 
 struct CacheHelper {
     private let fileManager: FileManager
@@ -19,11 +19,25 @@ struct CacheHelper {
         self.logger = logger
     }
 
-    func exists(_ url: URL) -> Bool {
-        fileManager.fileExists(atPath: url.path)
+    func withCache<T: Content>(withKey key: String, _ apiCall: () async throws -> T) async throws -> T {
+        if exists(key) {
+            return try get(from: key).get()
+        }
+
+        let response = try await apiCall()
+
+        try? set(key, data: response).get()
+
+        return response
     }
 
-    func get<T: Decodable>(from url: URL) -> Result<T, Abort> {
+    private func exists(_ key: String) -> Bool {
+        let url = makeURL(from: key)
+        return fileManager.fileExists(atPath: url.path)
+    }
+
+    private func get<T: Decodable>(from key: String) -> Result<T, Abort> {
+        let url = makeURL(from: key)
         let data: Data
         do {
             data = try Data(contentsOf: url)
@@ -44,7 +58,7 @@ struct CacheHelper {
         return .success(decodedData)
     }
 
-    func set<T: Encodable>(_ url: URL, data: T) -> Result<Void, Abort> {
+    private func set<T: Encodable>(_ key: String, data: T) -> Result<Void, Abort> {
         let encodedData: Data
         do {
             encodedData = try jsonEncoder.encode(data)
@@ -53,6 +67,7 @@ struct CacheHelper {
             return .failure(Abort(.internalServerError, reason: "Something went wrong"))
         }
 
+        let url = makeURL(from: key)
         do {
             try encodedData.write(to: url)
         } catch {
@@ -62,5 +77,14 @@ struct CacheHelper {
 
         logger?.info("successfully wrote cache to \(url.absoluteString)")
         return .success(())
+    }
+
+    private func makeURL(from key: String) -> URL {
+        URL(fileURLWithPath: #file)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("Resources")
+            .appendingPathComponent(key)
+            .appendingPathExtension("json")
     }
 }
