@@ -30,9 +30,13 @@ struct PokedexScreen: View {
         .padding(.vertical, .medium)
         .padding(.horizontal, .medium)
         .sheet(isPresented: $viewModel.showPokemonSheet, content: {
-            PokemonDetailsSheet(selectedPokemon: viewModel.selectedPokemon)
+            PokemonDetailsSheet(selectedPokemon: viewModel.selectedPokemon, close: { viewModel.closePokemonSheet() })
+            #if os(macOS)
+                .frame(minWidth: 250, minHeight: 250)
+            #else
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
+            #endif
         })
         .navigationTitle(Text("Kanto Pokedex"))
         .onAppear(perform: handleOnAppear)
@@ -79,6 +83,11 @@ extension PokedexScreen {
 
         func pokedexItemAction(_ pokemon: Pokemon) async {
             await setSelectedPokemon(pokemon)
+        }
+
+        @MainActor
+        func closePokemonSheet() {
+            showPokemonSheet = false
         }
 
         @MainActor

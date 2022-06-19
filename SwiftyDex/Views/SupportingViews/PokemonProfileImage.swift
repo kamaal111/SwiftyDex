@@ -28,8 +28,6 @@ struct PokemonProfileImage: View {
             .padding(.all, size / 15)
             .overlay(RoundedRectangle(cornerRadius: size / 15).stroke(withBorder ? .black : .clear, lineWidth: 1))
     }
-
-//    private static let blueBorderColor = Color(red: 99 / 255, green: 176 / 255, blue: 244 / 255)
 }
 
 struct PokemonProfileImage_Previews: PreviewProvider {

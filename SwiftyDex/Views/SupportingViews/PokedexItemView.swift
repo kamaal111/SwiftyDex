@@ -10,8 +10,12 @@ import SalmonUI
 import APIModels
 
 struct PokedexItemView: View {
+    @Environment(\.colorScheme) var colorScheme
+
     let pokemon: Pokemon
     let action: (_ pokemon: Pokemon) -> Void
+
+    private let backgroundOpacity: CGFloat = 0.01
 
     var body: some View {
         Button(action: { action(pokemon) }) {
@@ -26,8 +30,17 @@ struct PokedexItemView: View {
                 }
             }
             .ktakeWidthEagerly(alignment: .leading)
+            .background(backgroundColor)
+            .cornerRadius(.medium)
         }
         .buttonStyle(.plain)
+    }
+
+    private var backgroundColor: Color {
+        if colorScheme == .dark {
+            return .black.opacity(backgroundOpacity)
+        }
+        return .white.opacity(backgroundOpacity)
     }
 }
 

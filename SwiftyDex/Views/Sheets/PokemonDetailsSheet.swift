@@ -10,9 +10,27 @@ import SalmonUI
 import APIModels
 
 struct PokemonDetailsSheet: View {
+    @Environment(\.device) var device
+
     let selectedPokemon: Pokemon?
+    let close: () -> Void
 
     var body: some View {
+        ZStack {
+            if device == .mac {
+                KSheetStack(
+                    leadingNavigationButton: { Text("") },
+                    trailingNavigationButton: { SheetCloseButton(action: close) }
+                ) {
+                    mainView
+                }
+            } else {
+                mainView
+            }
+        }
+    }
+
+    private var mainView: some View {
         ZStack {
             if let selectedPokemon {
                 GeometryReader(content: { proxy in
@@ -34,7 +52,8 @@ struct PokemonDetailsSheet: View {
                     }
                     .ktakeWidthEagerly()
                 })
-                .padding(.all, .medium)
+                .padding(.horizontal, .medium)
+                .padding(.bottom, .medium)
             }
         }
     }
@@ -43,6 +62,6 @@ struct PokemonDetailsSheet: View {
 struct PokemonDetailsSheet_Previews: PreviewProvider {
     static var previews: some View {
         PokemonDetailsSheet(selectedPokemon: .init(name: "charizard", pokedexNumber: 6,
-                                                   pokemonTypes: ["fire", "flying"]))
+                                                   pokemonTypes: ["fire", "flying"]), close: { })
     }
 }
