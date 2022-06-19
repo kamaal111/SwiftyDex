@@ -32,18 +32,24 @@ struct CacheHelper {
         return response
     }
 
+    private var cacheURL: URL {
+        URL(fileURLWithPath: #file)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("Resources")
+            .appendingPathComponent("cache")
+            .appendingPathExtension("json")
+    }
+
     private func exists(_ key: String) -> Bool {
-        let url = makeURL(from: key)
-        return fileManager.fileExists(atPath: url.path)
+        let cache = readCache()
+        return cache[key] != nil
     }
 
     private func get<T: Decodable>(from key: String) -> Result<T, Abort> {
-        let url = makeURL(from: key)
-        let data: Data
-        do {
-            data = try Data(contentsOf: url)
-        } catch {
-            logger?.error("error while reading cache file; \(error)")
+        let cache = readCache()
+        guard let data = cache[key] else {
+            logger?.error("could not get cache for some reason")
             return .failure(Abort(.internalServerError, reason: "Something went wrong"))
         }
 
@@ -55,7 +61,7 @@ struct CacheHelper {
             return .failure(Abort(.internalServerError, reason: "Something went wrong"))
         }
 
-        logger?.info("successfully got cache from \(url.absoluteString)")
+        logger?.info("successfully got cache of (key=\"\(key)\")")
         return .success(decodedData)
     }
 
@@ -68,24 +74,21 @@ struct CacheHelper {
             return .failure(Abort(.internalServerError, reason: "Something went wrong"))
         }
 
-        let url = makeURL(from: key)
-        do {
-            try encodedData.write(to: url)
-        } catch {
-            logger?.error("error while writing data to file; \(error)")
+        var cache = readCache()
+        cache[key] = encodedData
+        let cached = NSDictionary(dictionary: cache).write(to: cacheURL, atomically: true)
+
+        guard cached else {
+            logger?.error("could not cache for some reason")
             return .failure(Abort(.internalServerError, reason: "Something went wrong"))
         }
 
-        logger?.info("successfully wrote cache to \(url.absoluteString)")
+        logger?.info("successfully wrote cached to (key=\"\(key)\")")
         return .success(())
     }
 
-    private func makeURL(from key: String) -> URL {
-        URL(fileURLWithPath: #file)
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-            .appendingPathComponent("Resources")
-            .appendingPathComponent(key)
-            .appendingPathExtension("json")
+    private func readCache() -> [String: Data] {
+        let cache = NSDictionary(contentsOf: cacheURL) as? [String: Data]
+        return cache ?? [:]
     }
 }
