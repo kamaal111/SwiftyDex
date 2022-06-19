@@ -29,9 +29,11 @@ struct PokedexScreen: View {
                         }
                     }
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, .medium)
             }
         }
+        .padding(.vertical, .medium)
+        .padding(.horizontal, .medium)
         .sheet(isPresented: $viewModel.showPokemonSheet, content: {
             PokemonDetailsSheet(selectedPokemon: viewModel.selectedPokemon)
                 .presentationDetents([.medium, .large])

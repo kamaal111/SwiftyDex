@@ -34,7 +34,7 @@ struct PokemonDetailsSheet: View {
                     }
                     .ktakeWidthEagerly()
                 })
-                .padding(.all, 16)
+                .padding(.all, .medium)
             }
         }
     }

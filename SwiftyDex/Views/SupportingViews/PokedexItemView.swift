@@ -27,6 +27,7 @@ struct PokedexItemView: View {
             }
             .ktakeWidthEagerly(alignment: .leading)
         }
+        .buttonStyle(.plain)
     }
 }
 
@@ -36,6 +37,6 @@ struct PokedexItemView_Previews: PreviewProvider {
             pokemon: .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]),
             action: { _ in }
         )
-        .padding(.all, 16)
+        .padding(.all, .medium)
     }
 }

@@ -15,10 +15,10 @@ struct PokemonTypeView: View {
         Text(type.name.uppercased())
             .bold()
             .foregroundColor(.white)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 4)
+            .padding(.horizontal, .small)
+            .padding(.vertical, .extraSmall)
             .background(backgroundColor)
-            .cornerRadius(2)
+            .cornerRadius(.extraExtraSmall)
     }
 
     private var backgroundColor: some View {
