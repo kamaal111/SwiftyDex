@@ -6,23 +6,20 @@
 //
 
 import os.log
-import PokeAPI
 import APIModels
 import Foundation
-import PokeAPIModels
 import APIClient
 
 final class PokemonModel: NSObject, ObservableObject {
     @Published private(set) var pokemons: [Pokemon] = []
 
-    private let pokeAPI: PokeAPI
     private let apiClient: APIClient
     private var gotInitialPokemonEntries = false
     private let preview: Bool
     private var pokemonDetailsFetched: [Int] = []
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "pokemon_model")
 
     init(preview: Bool = false) {
-        self.pokeAPI = .init()
         self.apiClient = .init()
         self.preview = preview
         logger.info("initializing \"\(PokemonModel.description())\" with (preview=\(preview))")
@@ -81,5 +78,3 @@ final class PokemonModel: NSObject, ObservableObject {
         self.pokemons = pokemons
     }
 }
-
-private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "pokemon_model")

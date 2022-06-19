@@ -19,8 +19,9 @@ struct CacheHelper {
         self.logger = logger
     }
 
-    func withCache<T: Content>(withKey key: String, update: Bool = false, _ apiCall: () async throws -> T) async throws -> T {
-        if !update && exists(key) {
+    func withCache<T: Content>(withKey key: String, update: Bool = false,
+                               _ apiCall: () async throws -> T) async throws -> T {
+        if !update, exists(key) {
             return try get(from: key).get()
         }
 
