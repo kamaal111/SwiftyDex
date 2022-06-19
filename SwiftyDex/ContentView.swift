@@ -8,15 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.device) var device
+
     @StateObject private var pokemonModel = PokemonModel(preview: true)
     @StateObject private var navigator = Navigator()
 
     var body: some View {
-        NavigationSplitView {
-            Sidebar(selection: $navigator.selection)
-        } detail: {
-            NavigationStack(path: $navigator.path) {
-                DetailColumn(selection: $navigator.selection)
+        ZStack {
+            if device == .iPhone {
+                NavigationStack(path: $navigator.path) {
+                    DetailColumn(selection: $navigator.selection)
+                }
+            } else {
+//                NavigationSplitView {
+//                    Sidebar(selection: $navigator.selection)
+//                } detail: {
+                NavigationStack(path: $navigator.path) {
+                    DetailColumn(selection: $navigator.selection)
+                }
+//                }
             }
         }
         #if os(macOS)

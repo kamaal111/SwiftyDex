@@ -35,7 +35,7 @@ final class PokemonModel: NSObject, ObservableObject {
         switch result {
         case let .failure(failure):
             // TODO: HANDLE ERROR IN VIEW
-            logger.error("error while getting initial pokemons; \(failure.localizedDescription)")
+            logger.error("error while getting initial pokemons; \(failure)")
             gotInitialPokemonEntries = false
             return
         case let .success(success):
@@ -54,10 +54,7 @@ final class PokemonModel: NSObject, ObservableObject {
         switch result {
         case let .failure(failure):
             // TODO: HANDLE ERROR IN VIEW
-            #if DEBUG
-            print("failure", failure)
-            #endif
-            logger.error("error while getting pokemon details; \(failure.localizedDescription)")
+            logger.error("error while getting pokemon details; \(failure)")
             return
         case let .success(success):
             response = success
