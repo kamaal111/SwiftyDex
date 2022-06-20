@@ -33,12 +33,7 @@ struct CacheHelper {
     }
 
     private var cacheURL: URL {
-        URL(fileURLWithPath: #file)
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-            .appendingPathComponent("Resources")
-            .appendingPathComponent("cache")
-            .appendingPathExtension("json")
+        Bundle.module.url(forResource: "cache", withExtension: "json")!
     }
 
     private func exists(_ key: String) -> Bool {

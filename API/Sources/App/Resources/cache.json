@@ -178,6 +178,16 @@
 	eyJuYW1lIjoiYnVsYmFzYXVyIiwicG9rZWRleE51bWJlciI6MSwicG9rZW1vblR5cGVz
 	IjpbImdyYXNzIiwicG9pc29uIl19
 	</data>
+	<key>pokemon_150</key>
+	<data>
+	eyJuYW1lIjoibWV3dHdvIiwicG9rZWRleE51bWJlciI6MTUwLCJwb2tlbW9uVHlwZXMi
+	OlsicHN5Y2hpYyJdfQ==
+	</data>
+	<key>pokemon_151</key>
+	<data>
+	eyJuYW1lIjoibWV3IiwicG9rZWRleE51bWJlciI6MTUxLCJwb2tlbW9uVHlwZXMiOlsi
+	cHN5Y2hpYyJdfQ==
+	</data>
 	<key>pokemon_2</key>
 	<data>
 	eyJuYW1lIjoiaXZ5c2F1ciIsInBva2VkZXhOdW1iZXIiOjIsInBva2Vtb25UeXBlcyI6
@@ -188,6 +198,11 @@
 	eyJuYW1lIjoidmVudXNhdXIiLCJwb2tlZGV4TnVtYmVyIjozLCJwb2tlbW9uVHlwZXMi
 	OlsiZ3Jhc3MiLCJwb2lzb24iXX0=
 	</data>
+	<key>pokemon_34</key>
+	<data>
+	eyJuYW1lIjoibmlkb2tpbmciLCJwb2tlZGV4TnVtYmVyIjozNCwicG9rZW1vblR5cGVz
+	IjpbInBvaXNvbiIsImdyb3VuZCJdfQ==
+	</data>
 	<key>pokemon_5</key>
 	<data>
 	eyJuYW1lIjoiY2hhcm1lbGVvbiIsInBva2VkZXhOdW1iZXIiOjUsInBva2Vtb25UeXBl
@@ -197,6 +212,11 @@
 	<data>
 	eyJuYW1lIjoiY2hhcml6YXJkIiwicG9rZWRleE51bWJlciI6NiwicG9rZW1vblR5cGVz
 	IjpbImZpcmUiLCJmbHlpbmciXX0=
+	</data>
+	<key>pokemon_65</key>
+	<data>
+	eyJuYW1lIjoiYWxha2F6YW0iLCJwb2tlZGV4TnVtYmVyIjo2NSwicG9rZW1vblR5cGVz
+	IjpbInBzeWNoaWMiXX0=
 	</data>
 </dict>
 </plist>
