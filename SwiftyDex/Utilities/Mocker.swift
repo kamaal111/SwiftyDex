@@ -13,9 +13,9 @@ struct Mocker {
     private init() { }
 
     static let pokemons: [Pokemon] = [
-        .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]),
-        .init(name: "charizard", pokedexNumber: 6, pokemonTypes: ["fire", "flying"]),
-        .init(name: "blastoise", pokedexNumber: 9, pokemonTypes: ["water"]),
+        .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: [.grass, .poison], species: "Seed Pokémon"),
+        .init(name: "charizard", pokedexNumber: 6, pokemonTypes: [.fire, .flying], species: "Flame Pokémon"),
+        .init(name: "blastoise", pokedexNumber: 9, pokemonTypes: [.water], species: "Shellfish Pokémon"),
     ]
 }
 #endif
