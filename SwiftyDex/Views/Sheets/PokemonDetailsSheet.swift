@@ -12,7 +12,7 @@ import APIModels
 struct PokemonDetailsSheet: View {
     @Environment(\.device) private var device
 
-    @State private var frameSize: CGSize = .zero
+    @StateObject private var viewModel = ViewModel()
 
     @Binding var headerSize: CGSize
 
@@ -32,21 +32,23 @@ struct PokemonDetailsSheet: View {
                 mainView
             }
         }
-        .kBindToFrameSize($frameSize)
+        .kBindToFrameSize($viewModel.frameSize)
     }
 
     private var mainView: some View {
-        ZStack {
+        VStack {
             header
                 .kBindToFrameSize($headerSize)
             tabs
+            activeTab
+                .padding(.vertical, .extraExtraSmall)
         }
         .padding(.top, .medium)
         .ktakeSizeEagerly(alignment: .top)
     }
 
     private var header: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack(spacing: 2) {
                 Text(pokemon.formattedPokedexNumber)
                     .font(.subheadline)
@@ -55,7 +57,7 @@ struct PokemonDetailsSheet: View {
                 Text(pokemon.name.capitalized)
                     .font(.headline)
             }
-            PokemonProfileImage(pokemon: pokemon, size: profileImageSize, withBorder: false)
+            PokemonProfileImage(pokemon: pokemon, size: viewModel.profileImageSize, withBorder: false)
             HStack {
                 ForEach(pokemon.pokemonTypes, id: \.self) { type in
                     PokemonTypeView(type: type)
@@ -65,14 +67,65 @@ struct PokemonDetailsSheet: View {
     }
 
     private var tabs: some View {
-        HStack { }
+        HStack {
+            ForEach(viewModel.tabs, id: \.self) { tab in
+                Button(action: { Task { await viewModel.selectTab(tab) } }) {
+                    Text(tab.title)
+                        .bold(viewModel.isActiveTab(tab))
+                        .foregroundColor(.accentColor)
+                        .underline(viewModel.isActiveTab(tab))
+                }
+                .buttonStyle(.plain)
+            }
+        }
     }
 
-    private var profileImageSize: CGFloat {
-        if frameSize.width > frameSize.height {
-            return frameSize.height / 3
+    private var activeTab: some View {
+        switch viewModel.activeTab {
+        case .about: return PokemonDetailsAboutTab(pokemon: pokemon)
         }
-        return frameSize.width / 3
+    }
+}
+
+extension PokemonDetailsSheet {
+    final class ViewModel: ObservableObject {
+        @Published var frameSize: CGSize = .zero
+        @Published private(set) var activeTab: Tabs = .about
+
+        enum Tabs: CaseIterable {
+            case about
+
+            var title: String {
+                switch self {
+                case .about: return "About"
+                }
+            }
+        }
+
+        var tabs: [Tabs] {
+            Tabs.allCases
+        }
+
+        var profileImageSize: CGFloat {
+            if frameSize.width > frameSize.height {
+                return frameSize.height / 3
+            }
+            return frameSize.width / 3
+        }
+
+        func selectTab(_ tab: Tabs) async {
+            guard !isActiveTab(tab) else { return }
+            await setActiveTab(tab)
+        }
+
+        func isActiveTab(_ tab: Tabs) -> Bool {
+            tab == activeTab
+        }
+
+        @MainActor
+        private func setActiveTab(_ tab: Tabs) {
+            activeTab = tab
+        }
     }
 }
 

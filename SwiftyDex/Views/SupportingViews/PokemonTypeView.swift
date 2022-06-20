@@ -13,10 +13,11 @@ struct PokemonTypeView: View {
 
     var body: some View {
         Text(type.name.capitalized)
+            .font(.caption)
             .bold()
             .foregroundColor(color)
-            .padding(.horizontal, .medium)
-            .padding(.vertical, .small)
+            .padding(.horizontal, .small)
+            .padding(.vertical, .extraSmall)
             .overlay(RoundedRectangle(cornerRadius: 16).stroke(color, lineWidth: 2))
     }
 
