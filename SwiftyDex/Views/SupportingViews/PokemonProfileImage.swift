@@ -30,18 +30,20 @@ struct PokemonProfileImage: View {
     }
 }
 
+#if DEBUG
 struct PokemonProfileImage_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             PokemonProfileImage(
-                pokemon: .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]),
+                pokemon: Mocker.pokemons.first!,
                 size: 60
             )
             PokemonProfileImage(
-                pokemon: .init(name: "blastoise", pokedexNumber: 9, pokemonTypes: ["water"]),
+                pokemon: Mocker.pokemons.find(by: \.pokedexNumber, is: 9)!,
                 size: 260,
                 withBorder: false
             )
         }
     }
 }
+#endif

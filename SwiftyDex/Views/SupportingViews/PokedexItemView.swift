@@ -45,12 +45,14 @@ struct PokedexItemView: View {
     }
 }
 
+#if DEBUG
 struct PokedexItemView_Previews: PreviewProvider {
     static var previews: some View {
         PokedexItemView(
-            pokemon: .init(name: "bulbasaur", pokedexNumber: 1, pokemonTypes: ["grass", "poison"]),
+            pokemon: Mocker.pokemons.first!,
             action: { _ in }
         )
         .padding(.all, .medium)
     }
 }
+#endif

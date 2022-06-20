@@ -16,9 +16,12 @@ struct PokemonDetailsAboutTab: View {
     }
 }
 
+#if DEBUG
+import ShrimpExtensions
+
 struct PokemonDetailsAboutTab_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonDetailsAboutTab(pokemon: .init(name: "charizard", pokedexNumber: 6,
-                                              pokemonTypes: ["fire", "flying"]))
+        PokemonDetailsAboutTab(pokemon: Mocker.pokemons.find(by: \.pokedexNumber, is: 6)!)
     }
 }
+#endif

@@ -136,8 +136,7 @@ struct PokemonDetailsSheet_Previews: PreviewProvider {
     static var previews: some View {
         PokemonDetailsSheet(
             headerSize: .constant(.squared(300)),
-            pokemon: .init(name: "charizard", pokedexNumber: 6,
-                           pokemonTypes: ["fire", "flying"]),
+            pokemon: Mocker.pokemons.find(by: \.pokedexNumber, is: 6)!,
             close: { }
         )
     }
