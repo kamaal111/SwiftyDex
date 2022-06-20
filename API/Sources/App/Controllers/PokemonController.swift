@@ -87,6 +87,6 @@ extension Pokemon: Content { }
 extension Pokemon {
     init?(fromEntry entry: PokedexResponse.PokemonEntry) {
         guard let name = entry.pokemonSpecies.name else { return nil }
-        self.init(name: name, pokedexNumber: entry.entryNumber, pokemonTypes: [])
+        self.init(name: name, pokedexNumber: entry.entryNumber, pokemonTypes: [] as [String], species: nil)
     }
 }
