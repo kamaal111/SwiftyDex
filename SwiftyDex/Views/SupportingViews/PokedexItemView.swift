@@ -21,6 +21,7 @@ struct PokedexItemView: View {
         Button(action: { action(pokemon) }) {
             HStack {
                 PokemonProfileImage(pokemon: pokemon, size: 60)
+                    .padding(.horizontal, .small)
                 VStack(alignment: .leading) {
                     Text(pokemon.name.capitalized)
                         .bold()
@@ -31,7 +32,7 @@ struct PokedexItemView: View {
             }
             .ktakeWidthEagerly(alignment: .leading)
             .background(backgroundColor)
-            .cornerRadius(.medium)
+            .cornerRadius(.small)
         }
         .buttonStyle(.plain)
     }

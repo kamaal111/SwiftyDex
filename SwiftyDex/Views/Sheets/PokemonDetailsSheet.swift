@@ -14,14 +14,16 @@ struct PokemonDetailsSheet: View {
 
     @State private var frameSize: CGSize = .zero
 
-    let selectedPokemon: Pokemon?
+    @Binding var headerSize: CGSize
+
+    let pokemon: Pokemon
     let close: () -> Void
 
     var body: some View {
         ZStack {
             if device == .mac {
                 KSheetStack(
-                    leadingNavigationButton: { Text("") },
+                    leadingNavigationButton: { Text.empty() },
                     trailingNavigationButton: { SheetCloseButton(action: close) }
                 ) {
                     mainView
@@ -35,26 +37,35 @@ struct PokemonDetailsSheet: View {
 
     private var mainView: some View {
         ZStack {
-            if let selectedPokemon {
-                VStack {
-                    HStack(spacing: 2) {
-                        Text(selectedPokemon.formattedPokedexNumber)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .bold()
-                        Text(selectedPokemon.name.capitalized)
-                            .font(.headline)
-                    }
-                    PokemonProfileImage(pokemon: selectedPokemon, size: profileImageSize, withBorder: false)
-                    HStack {
-                        ForEach(selectedPokemon.pokemonTypes, id: \.self) { type in
-                            PokemonTypeView(type: type)
-                        }
-                    }
+            header
+                .kBindToFrameSize($headerSize)
+            tabs
+        }
+        .padding(.top, .medium)
+        .ktakeSizeEagerly(alignment: .top)
+    }
+
+    private var header: some View {
+        VStack {
+            HStack(spacing: 2) {
+                Text(pokemon.formattedPokedexNumber)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .bold()
+                Text(pokemon.name.capitalized)
+                    .font(.headline)
+            }
+            PokemonProfileImage(pokemon: pokemon, size: profileImageSize, withBorder: false)
+            HStack {
+                ForEach(pokemon.pokemonTypes, id: \.self) { type in
+                    PokemonTypeView(type: type)
                 }
             }
         }
-        .ktakeSizeEagerly()
+    }
+
+    private var tabs: some View {
+        HStack { }
     }
 
     private var profileImageSize: CGFloat {
@@ -65,9 +76,17 @@ struct PokemonDetailsSheet: View {
     }
 }
 
+#if DEBUG
+import ShrimpExtensions
+
 struct PokemonDetailsSheet_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonDetailsSheet(selectedPokemon: .init(name: "charizard", pokedexNumber: 6,
-                                                   pokemonTypes: ["fire", "flying"]), close: { })
+        PokemonDetailsSheet(
+            headerSize: .constant(.squared(300)),
+            pokemon: .init(name: "charizard", pokedexNumber: 6,
+                           pokemonTypes: ["fire", "flying"]),
+            close: { }
+        )
     }
 }
+#endif

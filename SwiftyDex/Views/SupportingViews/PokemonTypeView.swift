@@ -27,7 +27,11 @@ struct PokemonTypeView: View {
 
 struct PokemonTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonTypeView(type: .flying)
-            .padding(.all, .medium)
+        VStack {
+            ForEach(PokemonTypes.allCases, id: \.self) { type in
+                PokemonTypeView(type: type)
+                    .padding(.all, .medium)
+            }
+        }
     }
 }
