@@ -35,15 +35,14 @@ struct PokemonController: Controller {
         else { throw Abort(.badRequest, reason: "Invalid ID or name provided") }
 
         return try await cacheHelper.withCache(withKey: "pokemon_\(idOrName)") {
-            try await pokeAPI.pokemon.getPokemonDetails(by: idOrName)
+            async let species = pokeAPI.pokemonSpecies.getSpecies(by: idOrName)
                 .mapError(returnClientErrorFromPokeAPI(_:))
-                .map {
-                    let pokemonTypes = $0.types
-                        .sorted(by: { $0.slot < $1.slot })
-                        .compactMap(\.type.name)
-                    return Pokemon(name: $0.name, pokedexNumber: $0.id, pokemonTypes: pokemonTypes)
-                }
                 .get()
+            async let details = pokeAPI.pokemon.getPokemonDetails(by: idOrName)
+                .mapError(returnClientErrorFromPokeAPI(_:))
+                .get()
+
+            return try await Pokemon(details: details, species: species)
         }
     }
 
@@ -87,6 +86,44 @@ extension Pokemon: Content { }
 extension Pokemon {
     init?(fromEntry entry: PokedexResponse.PokemonEntry) {
         guard let name = entry.pokemonSpecies.name else { return nil }
-        self.init(name: name, pokedexNumber: entry.entryNumber, pokemonTypes: [] as [String], species: nil)
+        self.init(
+            name: name,
+            pokedexNumber: entry.entryNumber,
+            pokemonTypes: [] as [String],
+            species: nil,
+            breeding: .none
+        )
+    }
+
+    init(details: PokemonDetails, species: PokemonSpecies) {
+        let pokemonTypes = details.types
+            .sorted(by: \.slot, using: .orderedAscending)
+            .compactMap(\.type.name)
+        let eggGroups = species.eggGroups.compactMap(\.name)
+        let breeding = PokemonBreeding(eggGroups: eggGroups)
+
+        self.init(
+            name: details.name,
+            pokedexNumber: details.id,
+            pokemonTypes: pokemonTypes,
+            species: species.name,
+            breeding: breeding
+        )
+    }
+}
+
+// - TODO: MOVE TO SHRIMP EXTENSIONS
+extension Array {
+    func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>, using comparison: ComparisonResult) -> [Element] {
+        sorted(by: {
+            switch comparison {
+            case .orderedAscending:
+                return $0[keyPath: keyPath] < $1[keyPath: keyPath]
+            case .orderedDescending:
+                return $0[keyPath: keyPath] > $1[keyPath: keyPath]
+            case .orderedSame:
+                return $0[keyPath: keyPath] == $1[keyPath: keyPath]
+            }
+        })
     }
 }

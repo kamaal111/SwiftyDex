@@ -11,6 +11,7 @@ import XiphiasNet
 public struct PokeAPI {
     public let pokemon: PokemonClient
     public let pokedex: PokedexClient
+    public let pokemonSpecies: PokemonSpeciesClient
 
     public init() {
         self.init(urlSession: .shared)
@@ -20,5 +21,6 @@ public struct PokeAPI {
         let networker = XiphiasNet(urlSession: urlSession)
         self.pokemon = .init(networker: networker)
         self.pokedex = .init(networker: networker)
+        self.pokemonSpecies = .init(networker: networker)
     }
 }

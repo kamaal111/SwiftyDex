@@ -12,21 +12,36 @@ public struct Pokemon: Hashable, Codable {
     public let pokedexNumber: Int
     public let pokemonTypes: [PokemonTypes]
     public let species: String?
+    public let breeding: PokemonBreeding?
 
-    public init(name: String, pokedexNumber: Int, pokemonTypes: [String], species: String? = nil) {
+    public init(
+        name: String,
+        pokedexNumber: Int,
+        pokemonTypes: [String],
+        species: String? = nil,
+        breeding: PokemonBreeding? = nil
+    ) {
         self.init(
             name: name,
             pokedexNumber: pokedexNumber,
             pokemonTypes: pokemonTypes.compactMap { PokemonTypes(rawValue: $0) },
-            species: species
+            species: species,
+            breeding: breeding
         )
     }
 
-    public init(name: String, pokedexNumber: Int, pokemonTypes: [PokemonTypes], species: String? = nil) {
+    public init(
+        name: String,
+        pokedexNumber: Int,
+        pokemonTypes: [PokemonTypes],
+        species: String? = nil,
+        breeding: PokemonBreeding? = nil
+    ) {
         self.name = name
         self.pokedexNumber = pokedexNumber
         self.pokemonTypes = pokemonTypes
         self.species = species
+        self.breeding = breeding
     }
 
     public var imageURL: URL? {
@@ -37,6 +52,8 @@ public struct Pokemon: Hashable, Codable {
         "#\(pokedexNumber.leftPadding(toLength: 3, withPad: "0"))"
     }
 }
+
+// - TODO: MOVE TO SHRIMP EXTENSIONS
 
 extension Int {
     func leftPadding(toLength: Int, withPad character: Character) -> String {
