@@ -42,7 +42,7 @@ struct PokemonController: Controller {
                 .mapError(returnClientErrorFromPokeAPI(_:))
                 .get()
 
-            return try await Pokemon(details: details, species: species)
+            return try await Pokemon(details: details, species: species, language: "en")
         }
     }
 
@@ -95,18 +95,25 @@ extension Pokemon {
         )
     }
 
-    init(details: PokemonDetails, species: PokemonSpecies) {
+    init(details: PokemonDetails, species: PokemonSpecies, language: String) {
         let pokemonTypes = details.types
             .sorted(by: \.slot, using: .orderedAscending)
             .compactMap(\.type.name)
         let eggGroups = species.eggGroups.compactMap(\.name)
         let breeding = PokemonBreeding(eggGroups: eggGroups)
 
+        let genera = species.genera
+        let species = genera
+            .first(where: { $0.language.name == language })?
+            .genus ?? genera
+            .first(where: { $0.language.name == "en" })?
+            .genus
+
         self.init(
             name: details.name,
             pokedexNumber: details.id,
             pokemonTypes: pokemonTypes,
-            species: species.name,
+            species: species,
             breeding: breeding
         )
     }

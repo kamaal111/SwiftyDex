@@ -14,12 +14,12 @@ public struct PokemonSpecies: Codable, Hashable, Identifiable {
     public let color: ResponseEntry
     public let eggGroups: [ResponseEntry]
     public let evolutionChain: EvolutionChain
-    public let evolvesFromSpecies: ResponseEntry
+    public let evolvesFromSpecies: ResponseEntry?
     public let flavorTextEntries: [FlavorTextEntries]
-    public let formDescriptions: FormDescriptions
+    public let formDescriptions: [FormDescriptions]
     public let formsSwitchable: Bool
     public let genderRate: Int
-    public let genera: Genera
+    public let genera: [Genera]
     public let generation: ResponseEntry
     public let growthRate: ResponseEntry
     public let habitat: ResponseEntry
@@ -43,12 +43,12 @@ public struct PokemonSpecies: Codable, Hashable, Identifiable {
         color: ResponseEntry,
         eggGroups: [ResponseEntry],
         evolutionChain: EvolutionChain,
-        evolvesFromSpecies: ResponseEntry,
+        evolvesFromSpecies: ResponseEntry?,
         flavorTextEntries: [FlavorTextEntries],
-        formDescriptions: FormDescriptions,
+        formDescriptions: [FormDescriptions],
         formsSwitchable: Bool,
         genderRate: Int,
-        genera: Genera,
+        genera: [Genera],
         generation: ResponseEntry,
         growthRate: ResponseEntry,
         habitat: ResponseEntry,
@@ -214,8 +214,13 @@ public struct PokemonSpecies: Codable, Hashable, Identifiable {
     }
 
     public struct Varieties: Codable, Hashable {
-        public let isDefault: Int
+        public let isDefault: Bool
         public let pokemon: ResponseEntry
+
+        public init(isDefault: Bool, pokemon: ResponseEntry) {
+            self.isDefault = isDefault
+            self.pokemon = pokemon
+        }
 
         enum CodingKeys: String, CodingKey {
             case isDefault = "is_default"

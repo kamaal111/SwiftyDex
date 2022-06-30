@@ -19,6 +19,12 @@ struct PokemonDetailsSheet: View {
     let pokemon: Pokemon
     let close: () -> Void
 
+    init(headerSize: Binding<CGSize>, pokemon: Pokemon, close: @escaping () -> Void) {
+        self._headerSize = headerSize
+        self.pokemon = pokemon
+        self.close = close
+    }
+
     var body: some View {
         ZStack {
             if device == .mac {
@@ -58,6 +64,11 @@ struct PokemonDetailsSheet: View {
                     .font(.headline)
             }
             PokemonProfileImage(pokemon: pokemon, size: viewModel.profileImageSize, withBorder: false)
+            if let species = pokemon.species {
+                Text(species)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, .small)
+            }
             HStack {
                 ForEach(pokemon.pokemonTypes, id: \.self) { type in
                     PokemonTypeView(type: type)
