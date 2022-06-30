@@ -9,9 +9,9 @@ let package = Package(
     dependencies: [
         // 💧 A server-side Swift web framework.
         .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
-        .package(path: "../Packages/PokeAPI"),
-        .package(path: "../Packages/APIModels"),
-        .package(path: "../Packages/PokeAPIModels"),
+        .package(path: "../Packages/Networking/PokeAPI"),
+        .package(path: "../Packages/Networking/APIModels"),
+        .package(path: "../Packages/Networking/PokeAPIModels"),
     ],
     targets: [
         .target(

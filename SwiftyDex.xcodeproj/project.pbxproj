@@ -142,6 +142,18 @@
 			path = Sheets;
 			sourceTree = "<group>";
 		};
+		2C6E3629286E26CB00AC744A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				2CBB8DDF285CF68600505FAE /* APIClient */,
+				2CBB8DDC285CF56100505FAE /* APIModels */,
+				2CBB8DE0285CF73900505FAE /* ClientKit */,
+				2C9F03642854B4CC00251D96 /* PokeAPI */,
+				2CBB8DE1285CFC9200505FAE /* PokeAPIModels */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		2C735803285F9F9E00D5922A /* Enumarations */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,11 +192,7 @@
 		2C9F03632854B45B00251D96 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				2CBB8DDF285CF68600505FAE /* APIClient */,
-				2CBB8DDC285CF56100505FAE /* APIModels */,
-				2CBB8DE0285CF73900505FAE /* ClientKit */,
-				2C9F03642854B4CC00251D96 /* PokeAPI */,
-				2CBB8DE1285CFC9200505FAE /* PokeAPIModels */,
+				2C6E3629286E26CB00AC744A /* Networking */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
