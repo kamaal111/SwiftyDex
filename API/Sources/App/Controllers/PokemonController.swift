@@ -34,28 +34,32 @@ struct PokemonController: Controller {
         guard let idOrName = request.parameters.get("idOrName")
         else { throw Abort(.badRequest, reason: "Invalid ID or name provided") }
 
-        return try await cacheHelper.withCache(withKey: "pokemon_\(idOrName)") {
-            async let species = pokeAPI.pokemonSpecies.getSpecies(by: idOrName)
+        async let species = cacheHelper.withCache(withKey: "species_\(idOrName)") {
+            try await pokeAPI.pokemonSpecies.getSpecies(by: idOrName)
                 .mapError(returnClientErrorFromPokeAPI(_:))
                 .get()
-            async let details = pokeAPI.pokemon.getPokemonDetails(by: idOrName)
-                .mapError(returnClientErrorFromPokeAPI(_:))
-                .get()
-
-            return try await Pokemon(details: details, species: species, language: "en")
         }
+        async let details = cacheHelper.withCache(withKey: "details_\(idOrName)") {
+            try await pokeAPI.pokemon.getPokemonDetails(by: idOrName)
+                .mapError(returnClientErrorFromPokeAPI(_:))
+                .get()
+        }
+
+        return try await Pokemon(details: details, species: species, language: "en")
     }
 
     func getPokedex(request: Request) async throws -> [Pokemon] {
         guard let id = request.parameters.get("id"), let id = Int(id)
         else { throw Abort(.badRequest, reason: "Invalid ID provided") }
 
-        return try await cacheHelper.withCache(withKey: "pokedex_\(id)") {
+        let pokedex = try await cacheHelper.withCache(withKey: "pokedex_\(id)") {
             try await pokeAPI.pokedex.getPokedex(by: id)
                 .mapError(returnClientErrorFromPokeAPI(_:))
-                .map { $0.pokemonEntries.compactMap { Pokemon(fromEntry: $0) } }
                 .get()
         }
+
+        return pokedex.pokemonEntries
+            .compactMap(Pokemon.init(fromEntry:))
     }
 
     private func returnClientErrorFromPokeAPI(_ error: ClientKitErrors) -> Abort {

@@ -9,7 +9,7 @@ import SwiftUI
 import APIModels
 
 extension PokemonTypes {
-    public var colors: [Color] {
+    var colors: [Color] {
         colorHex?.compactMap { Color(hex: $0) } ?? []
     }
 }

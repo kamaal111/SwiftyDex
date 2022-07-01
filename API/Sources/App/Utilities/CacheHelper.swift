@@ -19,7 +19,8 @@ struct CacheHelper {
         self.logger = logger
     }
 
-    func withCache<T: Content>(withKey key: String, update: Bool = false,
+    func withCache<T: Codable>(withKey key: String,
+                               update: Bool = false,
                                _ apiCall: () async throws -> T) async throws -> T {
         if !update, exists(key) {
             return try get(from: key).get()
@@ -33,7 +34,12 @@ struct CacheHelper {
     }
 
     private var cacheURL: URL {
-        Bundle.module.url(forResource: "cache", withExtension: "json")!
+        URL(fileURLWithPath: #file)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("Resources")
+            .appendingPathComponent("cache")
+            .appendingPathExtension("xml")
     }
 
     private func exists(_ key: String) -> Bool {
@@ -71,6 +77,7 @@ struct CacheHelper {
 
         var cache = readCache()
         cache[key] = encodedData
+        logger?.debug("cache keys: \(cache.keys)")
         let cached = NSDictionary(dictionary: cache).write(to: cacheURL, atomically: true)
 
         guard cached else {
